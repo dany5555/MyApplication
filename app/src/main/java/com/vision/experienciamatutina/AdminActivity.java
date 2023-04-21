@@ -16,13 +16,13 @@ import java.util.Random;
 
 public class AdminActivity extends AppCompatActivity {
 
-    Button generate1RCExamButton, generate2RCExamButton, generate3RCExamButton, generateSemiFinalExamButton, generateFinalExamButton;
+    Button generateFirstRoundExamButton, generateSecondRoundExamButton, generateThirdRoundExamButton, generateFinalRoundExamButton, generateFinalExamButton;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference examRef1RC = database.getReference("Exam1RC");
-    DatabaseReference examRef2RC = database.getReference("Exam2RC");
-    DatabaseReference examRef3RC = database.getReference("Exam3RC");
-    DatabaseReference examRefSemiFinal = database.getReference("ExamSemiFinal");
-    DatabaseReference examRefFinal = database.getReference("ExamFinal");
+    DatabaseReference firstRoundExamRef = database.getReference("Exam Round 1");
+    DatabaseReference secondRoundExamRef = database.getReference("Exam Round 2");
+    DatabaseReference thirdRoundExamRef = database.getReference("Exam Round 3");
+    DatabaseReference finalRoundExamRef = database.getReference("Exam Final Round");
+    DatabaseReference examRefFinal = database.getReference("Exam Final Round");
 
     ArrayList<String> datesList = new ArrayList<>();
     ArrayList<String> titlesList = new ArrayList<>();
@@ -46,14 +46,13 @@ public class AdminActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
 
-        generate1RCExamButton = findViewById(R.id.generate_1rc_exam_button);
-        generate2RCExamButton = findViewById(R.id.generate_2rc_exam_button);
-        generate3RCExamButton = findViewById(R.id.generate_3rc_exam_button);
-        generateSemiFinalExamButton = findViewById(R.id.generate_semi_final_exam_button);
+        generateFirstRoundExamButton = findViewById(R.id.generate_1rc_exam_button);
+        generateSecondRoundExamButton = findViewById(R.id.generate_2rc_exam_button);
+        generateThirdRoundExamButton = findViewById(R.id.generate_3rc_exam_button);
         generateFinalExamButton = findViewById(R.id.generate_final_exam_button);
 
 
-        generate1RCExamButton.setOnClickListener(view -> {
+        generateFirstRoundExamButton.setOnClickListener(view -> {
 
             getDates1RCList();
             getTitles1RCList();
@@ -71,8 +70,8 @@ public class AdminActivity extends AppCompatActivity {
             Collections.shuffle(dayIdsList);
 
             for (int i = 0; i < datesList.size(); i++) {
-                // 2 questions only per every day.
-                for (int j = 0; j < 2; j++) {
+                // 3 questions only per every day.
+                for (int j = 0; j < 3; j++) {
                     // Generate a MC question
                     if (questionTypeList.get(0).equals("MC")) {
                         generateMultipleChoiceQuestion(dayIdsList.get(i));
@@ -105,14 +104,14 @@ public class AdminActivity extends AppCompatActivity {
                 questionModel.setOption4(finalQuestionsList.get(i).option4);
 
                 if (i < 9) {
-                    examRef1RC.child("Pregunta " + "0" + (i + 1)).setValue(questionModel);
+                    firstRoundExamRef.child("Pregunta " + "0" + (i + 1)).setValue(questionModel);
                 } else {
-                    examRef1RC.child("Pregunta " + (i + 1)).setValue(questionModel);
+                    firstRoundExamRef.child("Pregunta " + (i + 1)).setValue(questionModel);
                 }
             }
         });
 
-        generate2RCExamButton.setOnClickListener(view -> {
+        generateSecondRoundExamButton.setOnClickListener(view -> {
 
             getDates2RCList();
             getTitles2RCList();
@@ -130,8 +129,8 @@ public class AdminActivity extends AppCompatActivity {
             Collections.shuffle(dayIdsList);
 
             for (int i = 0; i < datesList.size(); i++) {
-                // 2 questions only per every day.
-                for (int j = 0; j < 2; j++) {
+                // 3 questions only per every day.
+                for (int j = 0; j < 3; j++) {
                     // Generate a MC question
                     if (questionTypeList.get(0).equals("MC")) {
                         generateMultipleChoiceQuestion(dayIdsList.get(i));
@@ -164,13 +163,13 @@ public class AdminActivity extends AppCompatActivity {
                 questionModel.setOption4(finalQuestionsList.get(i).option4);
 
                 if (i < 9) {
-                    examRef2RC.child("Pregunta " + "0" + (i + 1)).setValue(questionModel);
+                    secondRoundExamRef.child("Pregunta " + "0" + (i + 1)).setValue(questionModel);
                 } else {
-                    examRef2RC.child("Pregunta " + (i + 1)).setValue(questionModel);
+                    secondRoundExamRef.child("Pregunta " + (i + 1)).setValue(questionModel);
                 }            }
         });
 
-        generate3RCExamButton.setOnClickListener(view -> {
+        generateThirdRoundExamButton.setOnClickListener(view -> {
 
             getDates3RCList();
             getTitles3RCList();
@@ -189,7 +188,7 @@ public class AdminActivity extends AppCompatActivity {
 
             for (int i = 0; i < datesList.size(); i++) {
                 // 2 questions only per every day.
-                for (int j = 0; j < 2; j++) {
+                for (int j = 0; j < 3; j++) {
                     // Generate a MC question
                     if (questionTypeList.get(0).equals("MC")) {
                         generateMultipleChoiceQuestion(dayIdsList.get(i));
@@ -222,69 +221,11 @@ public class AdminActivity extends AppCompatActivity {
                 questionModel.setOption4(finalQuestionsList.get(i).option4);
 
                 if (i < 9) {
-                    examRef3RC.child("Pregunta " + "0" + (i + 1)).setValue(questionModel);
+                    thirdRoundExamRef.child("Pregunta " + "0" + (i + 1)).setValue(questionModel);
                 } else {
-                    examRef3RC.child("Pregunta " + (i + 1)).setValue(questionModel);
+                    thirdRoundExamRef.child("Pregunta " + (i + 1)).setValue(questionModel);
                 }
             }
-        });
-
-        generateSemiFinalExamButton.setOnClickListener(view -> {
-
-            getDatesFinalsList();
-            getTitlesFinalsList();
-            getVerseContentsFinalsList();
-            getVersesFinalsList();
-            getDayIds();
-            getQuestionTypeSemiFinal();
-
-            for (int i = 0; i < datesList.size(); i++) {
-                dayObjectList.add(new DayObjectModel(dayIdsList.get(i), datesList.get(i), titlesList.get(i), verseContentsList.get(i), versesList.get(i)));
-                //notMixedDayIdsList.add(new DayObjectModel(dayIdsList.get(i), datesList.get(i), titlesList.get(i), verseContentsList.get(i), versesList.get(i)));
-
-            }
-
-            Collections.shuffle(dayIdsList);
-
-            for (int i = 0; i < datesList.size(); i++) {
-                // 2 questions only per every day.
-                for (int j = 0; j < 2; j++) {
-                    // Generate a MC question
-                    if (questionTypeList.get(0).equals("MC")) {
-                        generateMultipleChoiceQuestion(dayIdsList.get(i));
-                    }
-                    // Generate a TF question
-                    else if (questionTypeList.get(0).equals("TF")) {
-                        generateTrueOrFalseQuestions(dayIdsList.get(i));
-                    }
-
-                    // Generate a FB question
-                    else {
-                        generateFillInTheBlankQuestions(dayIdsList.get(i));
-                    }
-
-                    questionTypeList.remove(0);
-                }
-            }
-
-            Collections.shuffle(finalQuestionsList);
-
-            QuestionModel questionModel = new QuestionModel();
-
-            for (int i = 0; i < finalQuestionsList.size(); i++) {
-                questionModel.setQuestion(finalQuestionsList.get(i).question);
-                questionModel.setQuestionType(finalQuestionsList.get(i).questionType);
-                questionModel.setAnswer(finalQuestionsList.get(i).answer);
-                questionModel.setOption1(finalQuestionsList.get(i).option1);
-                questionModel.setOption2(finalQuestionsList.get(i).option2);
-                questionModel.setOption3(finalQuestionsList.get(i).option3);
-                questionModel.setOption4(finalQuestionsList.get(i).option4);
-
-                if (i < 9) {
-                    examRefSemiFinal.child("Pregunta " + "0" + (i + 1)).setValue(questionModel);
-                } else {
-                    examRefSemiFinal.child("Pregunta " + (i + 1)).setValue(questionModel);
-                }            }
         });
 
         generateFinalExamButton.setOnClickListener(view -> {
@@ -302,24 +243,15 @@ public class AdminActivity extends AppCompatActivity {
 
             }
 
-            Collections.shuffle(dayIdsList);
+            //Collections.shuffle(dayIdsList);
+
+            for (int i = 0; i < dayIdsList.size(); i++) {
+                generateLevel1Question(i);
+                generateLevel2Question(i);
+                generateLevel3Question(i);
+            }
 
             Log.e("lol", "size: " + questionTypeList.size());
-
-            generateLevel1Question(dayIdsList.get(0));
-            generateLevel2Question(dayIdsList.get(0));
-            generateLevel2Question(dayIdsList.get(1));
-            generateLevel3Question(dayIdsList.get(1));
-            generateLevel1Question(dayIdsList.get(2));
-            generateLevel3Question(dayIdsList.get(2));
-            generateLevel1Question(dayIdsList.get(3));
-            generateLevel2Question(dayIdsList.get(3));
-            generateLevel2Question(dayIdsList.get(4));
-            generateLevel3Question(dayIdsList.get(4));
-            generateLevel1Question(dayIdsList.get(5));
-            generateLevel3Question(dayIdsList.get(5));
-            generateLevel1Question(dayIdsList.get(6));
-            generateLevel2Question(dayIdsList.get(6));
 
             Collections.shuffle(finalQuestionsList);
 
@@ -346,21 +278,27 @@ public class AdminActivity extends AppCompatActivity {
 
     public ArrayList<String> getQuestionTypeQualificationPhase() {
         questionTypeList.add("MC");
-        questionTypeList.add("FB");
-        questionTypeList.add("MC");
-        questionTypeList.add("TF");
         questionTypeList.add("TF");
         questionTypeList.add("FB");
         questionTypeList.add("MC");
-        questionTypeList.add("FB");
-        questionTypeList.add("MC");
-        questionTypeList.add("TF");
         questionTypeList.add("TF");
         questionTypeList.add("FB");
         questionTypeList.add("MC");
+        questionTypeList.add("TF");
         questionTypeList.add("FB");
         questionTypeList.add("MC");
         questionTypeList.add("TF");
+        questionTypeList.add("FB");
+        questionTypeList.add("MC");
+        questionTypeList.add("TF");
+        questionTypeList.add("FB");
+        questionTypeList.add("MC");
+        questionTypeList.add("TF");
+        questionTypeList.add("FB");
+        questionTypeList.add("MC");
+        questionTypeList.add("TF");
+        questionTypeList.add("FB");
+
 
         return questionTypeList;
     }
@@ -401,205 +339,201 @@ public class AdminActivity extends AppCompatActivity {
 
 
     public ArrayList<String> getDates1RCList() {
-        datesList.add("1 de Octubre");
-        datesList.add("2 de Octubre");
-        datesList.add("3 de Octubre");
-        datesList.add("4 de Octubre");
-        datesList.add("5 de Octubre");
-        datesList.add("6 de Octubre");
-        datesList.add("7 de Octubre");
-        datesList.add("8 de Octubre");
+        datesList.add("1 de Abril");
+        datesList.add("2 de Abril");
+        datesList.add("3 de Abril");
+        datesList.add("4 de Abril");
+        datesList.add("5 de Abril");
+        datesList.add("6 de Abril");
+        datesList.add("7 de Abril");
 
         return datesList;
     }
 
     public ArrayList<String> getDates2RCList() {
-        datesList.add("9 de Octubre");
-        datesList.add("10 de Octubre");
-        datesList.add("11 de Octubre");
-        datesList.add("12 de Octubre");
-        datesList.add("13 de Octubre");
-        datesList.add("14 de Octubre");
-        datesList.add("15 de Octubre");
-        datesList.add("16 de Octubre");
+        datesList.add("8 de Abril");
+        datesList.add("9 de Abril");
+        datesList.add("10 de Abril");
+        datesList.add("11 de Abril");
+        datesList.add("12 de Abril");
+        datesList.add("13 de Abril");
+        datesList.add("14 de Abril");
 
         return datesList;
     }
 
     public ArrayList<String> getDates3RCList() {
-        datesList.add("17 de Octubre");
-        datesList.add("18 de Octubre");
-        datesList.add("19 de Octubre");
-        datesList.add("20 de Octubre");
-        datesList.add("21 de Octubre");
-        datesList.add("22 de Octubre");
-        datesList.add("23 de Octubre");
-        datesList.add("24 de Octubre");
+        datesList.add("15 de Abril");
+        datesList.add("16 de Abril");
+        datesList.add("17 de Abril");
+        datesList.add("18 de Abril");
+        datesList.add("19 de Abril");
+        datesList.add("20 de Abril");
+        datesList.add("21 de Abril");
+        datesList.add("22 de Abril");
 
         return datesList;
     }
 
     public ArrayList<String> getDatesFinalsList() {
-        datesList.add("25 de Octubre");
-        datesList.add("26 de Octubre");
-        datesList.add("27 de Octubre");
-        datesList.add("28 de Octubre");
-        datesList.add("29 de Octubre");
-        datesList.add("30 de Octubre");
-        datesList.add("31 de Octubre");
+        datesList.add("23 de Abril");
+        datesList.add("24 de Abril");
+        datesList.add("25 de Abril");
+        datesList.add("26 de Abril");
+        datesList.add("27 de Abril");
+        datesList.add("28 de Abril");
+        datesList.add("29 de Abril");
+        datesList.add("30 de Abril");
 
         return datesList;
     }
 
     public ArrayList<String> getTitles1RCList() {
-        titlesList.add("\"El Señor es mi pastor\"");
-        titlesList.add("\"Brazos fuertes\"");
-        titlesList.add("\"El mejor amigo\"");
-        titlesList.add("\"Ovejas sin pastor\"");
-        titlesList.add("\"«Nada me falta»\"");
-        titlesList.add("\"Necesitamos descanso\"");
-        titlesList.add("\"No temas a nada\"");
-        titlesList.add("\"El Dios que entiende\"");
+        titlesList.add("\"Mucho más sabios\"");
+        titlesList.add("\"La belleza de las formas\"");
+        titlesList.add("\"¡Menudo cálculo!\"");
+        titlesList.add("\"No siempre le entiendo pero siempre me ama\"");
+        titlesList.add("\"Una mirada justa, juicios justos\"");
+        titlesList.add("\"Indicadores\"");
+        titlesList.add("\"Y fue así\"");
 
         return titlesList;
     }
 
     public ArrayList<String> getTitles2RCList() {
-        titlesList.add("\"El pastor muestra el camino\"");
-        titlesList.add("\"El valle de sombra de muerte\"");
-        titlesList.add("\"La vara del pastor\"");
-        titlesList.add("\"Nos prepara mesa\"");
-        titlesList.add("\"Las heridas de la vida\"");
-        titlesList.add("\"Serás lo que quieras ser\"");
-        titlesList.add("\"El mejor pastor\"");
-        titlesList.add("\"El pastor de Israel\"");
+        titlesList.add("\"Menos lobos, Caperucita\"");
+        titlesList.add("\"'Time lapse'\"");
+        titlesList.add("\"Cataratas\"");
+        titlesList.add("\"Ingeniería inversa\"");
+        titlesList.add("\"'Big Big Data'\"");
+        titlesList.add("\"Serendipia\"");
+        titlesList.add("\"Ni la Academia ni el Liceo\"");
 
         return titlesList;
     }
 
     public ArrayList<String> getTitles3RCList() {
-        titlesList.add("\"Somos su pueblo\"");
-        titlesList.add("\"Sarita la pastora\"");
-        titlesList.add("\"Los ríos no te ahogarán\"");
-        titlesList.add("\"Le importamos\"");
-        titlesList.add("\"Dios busca a sus ovejas\"");
-        titlesList.add("\"Buscar las ovejas perdidas\"");
-        titlesList.add("\"Le pertenecemos\"");
-        titlesList.add("\"El pastor inútil\"");
+        titlesList.add("\"La fruta nuestra de cada día\"");
+        titlesList.add("\"'Slow food'\"");
+        titlesList.add("\"Preciosura\"");
+        titlesList.add("\"La taxonomía de Cristo\"");
+        titlesList.add("\"Las primeras cosas\"");
+        titlesList.add("\"Gracia con una pizca de sal\"");
+        titlesList.add("\"A examen\"");
+        titlesList.add("\"El mejor orador\"");
 
         return titlesList;
     }
 
     public ArrayList<String> getTitlesFinalsList() {
-        titlesList.add("\"Ovejas y cabritos\"");
-        titlesList.add("\"Escuchar su voz\"");
-        titlesList.add("\"Él murió por nosotros\"");
-        titlesList.add("\"La fe que vence al mundo\"");
-        titlesList.add("\"Cambio radical\"");
-        titlesList.add("\"El premio supremo\"");
-        titlesList.add("\"Rescate espectacular\"");
+        titlesList.add("\"Las palabras caducas y las palabras perennes\"");
+        titlesList.add("\"Reconoce y confía\"");
+        titlesList.add("\"Asertividad y más asertividad\"");
+        titlesList.add("\"Zombis\"");
+        titlesList.add("\"Voz de los silenciados\"");
+        titlesList.add("\"Los tres filtros\"");
+        titlesList.add("\"Una palabra cariñosa\"");
+        titlesList.add("\"Cómo ser amable y no morir en el intento\"");
 
         return titlesList;
     }
 
     public ArrayList<String> getVerseContents1RCList() {
-        verseContentsList.add("«El Señor es mi pastor»");
-        verseContentsList.add("«Pero su arco se mantuvo firme, porque sus brazos son fuertes. ¡Gracias al Dios fuerte de Jacob, al Pastor y Roca de Israel»");
-        verseContentsList.add("«Dios hablaba con Moisés cara a cara, como quien habla con un amigo»");
-        verseContentsList.add("«Entonces él dijo: “He visto a todo Israel esparcido por los montes, como ovejas que no tienen pastor. Jehová ha dicho: ‘Estos no tienen señor. Que cada cual vuelva a su casa en paz’”»");
-        verseContentsList.add("«El Señor es mi pastor, nada me falta»");
-        verseContentsList.add("«En lugares de delicados pastos me hará descansar»");
-        verseContentsList.add("«Junto a aguas de reposo me pastoreará»");
-        verseContentsList.add("«Confortará mi alma»");
+        verseContentsList.add("«¿Quién es sabio para que sepa esto, y prudente para que lo comprenda? Porque los caminos de Jehová son rectos, por ellos andarán los justos, mas los rebeldes caerán en ellos»");
+        verseContentsList.add("«Todo lo hizo hermoso en su tiempo, y ha puesto eternidad en el corazón del hombre, sin que este alcance a comprender la obra hecha por Dios desde el principio hasta el fin»");
+        verseContentsList.add("«Él cuenta el número de las estrellas; a todas ellas llama por sus nombres. Grande es el Señor nuestro y mucho su poder, y su entendimiento es infinito»");
+        verseContentsList.add("«\"Porque mis pensamientos no son vuestros pensamientos ni vuestros caminos mis caminos\", dice Jehová»");
+        verseContentsList.add("«¡Profundidad de las riquezas, de la sabiduría y del conocimiento de Dios! ¡Cuán insondables son sus juicios e inescrutables sus caminos!»");
+        verseContentsList.add("«Pero la sabiduría que es de lo alto es primeramente pura, después pacífica, amable, benigna, llena de misericordia y de buenos frutos, sin incertidumbre ni hipocresía»");
+        verseContentsList.add("«E hizo Dios un firmamento que separó las aguas que estaban debajo del firmamento, de las aguas que estaban sobre el firmamento. Y fue así»");
 
         return verseContentsList;
     }
 
     public ArrayList<String> getVerseContents2RCList() {
-        verseContentsList.add("«Me guiará por sendas de justicia por amor de su nombre»");
-        verseContentsList.add("«Aunque ande en valle de sombra de muerte, no temeré mal alguno, porque tú estarás conmigo»");
-        verseContentsList.add("«Tu vara y tu cayado me infundirán aliento»");
-        verseContentsList.add("«Aderezas mesa delante de mí en presencia de mis angustiadores»");
-        verseContentsList.add("«Unges mi cabeza con aceite; mi copa está rebosando»");
-        verseContentsList.add("«Ciertamente, el bien y la misericordia me seguirán todos los días de mi vida»");
-        verseContentsList.add("«Escogió a su siervo David, el que era pastor de ovejas; lo quitó de andar tras los rebaños, para que cuidara a su pueblo, para que fuera pastor de Israel. Y David cuidó del pueblo de Dios; los cuidó y los dirigió con mano hábil y corazón sincero»");
-        verseContentsList.add("«Pastor de Israel, que guías a José como a un rebaño, que tienes tu trono sobre los querubines, ¡escucha!»");
+        verseContentsList.add("«Estos son los orígenes de los cielos y de la tierra cuando fueron creados»");
+        verseContentsList.add("«Él es quien cambia los tiempos y las edades; quita reyes y pone reyes; da sabiduría a los sabios, y conocimiento a los entendidos»");
+        verseContentsList.add("«Ahora vemos por espejo, oscuramente; pero entonces veremos cara a cara. Ahora conozco en parte, pero entonces conoceré como fui conocido»");
+        verseContentsList.add("«Debemos siempre dar gracias a Dios por vosotros, hermanos, como es digno, por cuanto vuestra fe va creciendo y el amor de todos y cada uno de vosotros abunda para con los demás»");
+        verseContentsList.add("«Para que el Dios de nuestro Señor Jesucristo, el Padre de gloria, os dé espíritu de sabiduría y de revelación en el conocimiento de él»");
+        verseContentsList.add("«Si alguno de vosotros tiene falta de sabiduría, pídala a Dios, el cual da a todos abundantemente y sin reproche, y le será dada»");
+        verseContentsList.add("«¡Alaben la misericordia de Jehová y sus maravillas para con los hijos de los hombres!, porque sacia el alma menesterosa, y llena de bien al alma hambrienta»");
 
         return verseContentsList;
     }
 
     public ArrayList<String> getVerseContents3RCList() {
-        verseContentsList.add("«Reconozcan que el Señor es Dios; él nos hizo y somos suyos; ¡somos pueblo suyo y ovejas de su prado!»");
-        verseContentsList.add("«Viene como un pastor que cuida su rebaño; levanta los corderos en sus brazos, los lleva junto al pecho y atiende con cuidado a las recién paridas»");
-        verseContentsList.add("«Cuando pases por las aguas, yo estaré contigo; y si por los ríos, no te anegarán»");
-        verseContentsList.add("«Porque Jehová irá delante de vosotros, y vuestra retaguardia será el Dios de israel»");
-        verseContentsList.add("«Yo, el Señor, digo: Yo mismo voy a encargarme del cuidado de mi rebaño»");
-        verseContentsList.add("«Yo buscaré a la perdida y haré volver al redil a la descarriada, vendaré la perniquebrada y fortaleceré a la débil»");
-        verseContentsList.add("«Ustedes son mis ovejas, las ovejas de mi prado. Yo soy su Dios. Yo, el Señor, lo afirmo»");
-        verseContentsList.add("«¡Ay del pastor inútil que abandona su rebaño! ¡Que la espada le hiera el brazo, y el puñal le saque el ojo derecho! ¡Que del brazo quede tullido, y del ojo derecho, ciego!»");
+        verseContentsList.add("«Y mandó Jehová Dios al hombre, diciendo: \"De todo árbol del huerto podrás comer…\".»");
+        verseContentsList.add("«Entonces Jacob dio a Esaú pan y del guisado de las lentejas; él comió y bebió, se levantó y se fue...»");
+        verseContentsList.add("«Porque ¡cuánta es su bondad y cuánta su hermosura!...»");
+        verseContentsList.add("«Aunque andamos en la carne, no militamos según la carne»");
+        verseContentsList.add("«A los hijos de sus concubinas les dio Abraham regalos...»");
+        verseContentsList.add("«Sea vuestra palabra siempre con gracia, sazonada con sal, para que sepáis cómo debéis responder a cada uno»");
+        verseContentsList.add("«Examinadlo todo y retened lo bueno»");
+        verseContentsList.add("«Los alguaciles respondieron: ¡Jamás hombre alguno ha hablado como este hombre habla!»");
 
         return verseContentsList;
     }
 
     public ArrayList<String> getVerseContentsFinalsList() {
-        verseContentsList.add("«La gente de todas las naciones se reunirá delante de él, y él separará unos de otros, como el pastor separa las ovejas de las cabras»");
-        verseContentsList.add("«El portero le abre la puerta, y el pastor llama a cada oveja por su nombre, y las ovejas reconocen su voz; las saca del redil»");
-        verseContentsList.add("«Yo soy el buen pastor; el buen pastor su vida da por las ovejas»");
-        verseContentsList.add("«Porque todo lo que es nacido de Dios vence al mundo; y esta es la victoria que ha vencido al mundo, nuestra fe»");
-        verseContentsList.add("«Pues ustedes andaban antes como ovejas extraviadas, pero ahora han vuelto a Cristo, que los cuida como un pastor y vela por ustedes»");
-        verseContentsList.add("«Y cuando aparezca el Príncipe de los pastores, vosotros recibiréis la corona incorruptible de gloria»");
-        verseContentsList.add("«Ya no sufrirán hambre ni sed, ni los quemará el sol, ni el calor los molestará; porque el Cordero, que está en medio del trono, será su pastor y los guiará a manantiales de aguas de vida, y Dios secará toda lágrima de sus ojos»");
+        verseContentsList.add("«El labio veraz permanece para siempre; la lengua mentirosa, solo por un momento»");
+        verseContentsList.add("«El hombre le respondió: -La mujer que me diste por compañera me dio del árbol, y yo comí»");
+        verseContentsList.add("«El hombre se alegra con la respuesta de su boca; la palabra a su tiempo, ¡cuán buena es!»");
+        verseContentsList.add("«La muerte y la vida están en poder de la lengua; el que la ama, comerá de sus frutos»");
+        verseContentsList.add("«Abre tu boca en favor del mudo en el juicio de todos los desvalidos»");
+        verseContentsList.add("«Pero yo os digo que toda palabra ociosa que hablen de los hombres, de ella darán cuenta en el día del juicio»");
+        verseContentsList.add("«Entonces dijo Dios: \"Hagamos al hombre a nuestra imagen, conforme a nuestra semejanza; y tenga potestad sobre los peces del mar, las aves de los cielos y las bestias, sobre toda la tierra y sobre todo animal que se arrastra sobre la tierra\".»");
+        verseContentsList.add("«No devolváis mal por mal, ni maldición por maldición, sino por el contrario, bendiciendo...»");
 
         return verseContentsList;
     }
 
     public ArrayList<String> getVerses1RCList() {
-        versesList.add("\"Salmo 23:1\"");
-        versesList.add("\"Génesis 49:24, NVI");
-        versesList.add("\"Éxodo 33:11\"");
-        versesList.add("\"1 Reyes 22:17, RV95\"");
-        versesList.add("\"Salmo 23:1\"");
-        versesList.add("\"Salmo 23:2, RV95\"");
-        versesList.add("\"Salmo 23:2, RV95\"");
-        versesList.add("\"Salmo 23:3, RV95\"");
+        versesList.add("\"Oseas 14:9\"");
+        versesList.add("\"Eclesiastés 3:11");
+        versesList.add("\"Salmos 147:4-5\"");
+        versesList.add("\"Isaías 55:8\"");
+        versesList.add("\"Romanos 11:33\"");
+        versesList.add("\"Santiago 3:17\"");
+        versesList.add("\"Génesis 1:7\"");
 
         return versesList;
     }
 
     public ArrayList<String> getVerses2RCList() {
-        versesList.add("\"Salmo 23:3, RV95\"");
-        versesList.add("\"Salmo 23:4, RV95");
-        versesList.add("\"Salmo 23:4, RV95");
-        versesList.add("\"Salmo 23:4, RV95");
-        versesList.add("\"Salmo 23:5, RV95");
-        versesList.add("\"Salmo 23:6, RV95");
-        versesList.add("\"Salmo 78:70-72\"");
-        versesList.add("\"Salmo 80:1\"");
+        versesList.add("\"Génesis 2:4\"");
+        versesList.add("\"Daniel 2:21, LBLA");
+        versesList.add("\"1 Corintios 13:12");
+        versesList.add("\"2 Tesalonicenses 1:3");
+        versesList.add("\"Efesios 1:17");
+        versesList.add("\"Santiago 1:5");
+        versesList.add("\"Salmos 107:8-9\"");
 
         return versesList;
     }
 
     public ArrayList<String> getVerses3RCList() {
-        versesList.add("\"Salmo 100:3\"");
-        versesList.add("\"Isaías 40:11");
-        versesList.add("\"Isaías 43:2, RV95");
-        versesList.add("\"Isaías 52:12, RV95");
-        versesList.add("\"Ezequiel 34:11");
-        versesList.add("\"Ezequiel 34:16, RV95");
-        versesList.add("\"Ezequiel 34:31\"");
-        versesList.add("\"Zacarías 11:17, NVI\"");
+        versesList.add("\"Génesis 2:16\"");
+        versesList.add("\"Génesis 25:34");
+        versesList.add("\"Zacarías 9:17");
+        versesList.add("\"1 Corintios 10:3");
+        versesList.add("\"Génesis 25:6");
+        versesList.add("\"Colosenses 4:6");
+        versesList.add("\"1 Tesalonicenses 5:21\"");
+        versesList.add("\"Juan 7:46, LBLA\"");
 
         return versesList;
     }
 
     public ArrayList<String> getVersesFinalsList() {
-        versesList.add("\"Mateo 25:32\"");
-        versesList.add("\"Juan 10:3");
-        versesList.add("\"Juan 10:11, RV95\"");
-        versesList.add("\"1 Juan 5:4, RV95\"");
-        versesList.add("\"1 Pedro 2:25\"");
-        versesList.add("\"1 Pedro 5:4, RV95\"");
-        versesList.add("\"Apocalipsis 6:16, 17\"");
+        versesList.add("\"Proverbios 12:19\"");
+        versesList.add("\"Génesis 3:12");
+        versesList.add("\"Proverbios 15:23\"");
+        versesList.add("\"Proverbios 18:21\"");
+        versesList.add("\"Proverbios 31:8\"");
+        versesList.add("\"Mateo 12:36\"");
+        versesList.add("\"Génesis 1:26\"");
+        versesList.add("\"1 Pedro 3:9\"");
 
         return versesList;
     }
@@ -895,7 +829,7 @@ public class AdminActivity extends AppCompatActivity {
                         answerOption1 = "Falso";
                         answerOption2 = "Verdadero";
                     } else if (option2.equals("verse")) {
-                        question = "La fecha " + randDate + " corresponde a la lección con la cita bíblica " + dayObjectList.get(currentQuestionId).getVerse() + ". (1 Pt.)";
+                        question = "La fecha " + randDate + " corresponde a la cita bíblica " + dayObjectList.get(currentQuestionId).getVerse() + ". (1 Pt.)";
                         answer = "Falso";
                         answerOption1 = "Falso";
                         answerOption2 = "Verdadero";

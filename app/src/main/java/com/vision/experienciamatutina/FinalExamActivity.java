@@ -34,7 +34,7 @@ public class FinalExamActivity extends AppCompatActivity {
     public static ArrayList<QuestionModel> finalQuestionsList = new ArrayList<>();
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference teamRef = database.getReference("Answers Final");
+    DatabaseReference teamRef = database.getReference("Answers Final Round");
     DatabaseReference teamNameRef = database.getReference("Team PINS");
 
     @Override

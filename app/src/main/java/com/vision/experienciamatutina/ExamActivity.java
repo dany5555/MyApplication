@@ -32,11 +32,23 @@ public class ExamActivity extends AppCompatActivity {
     ImageView correctOrIncorrectImageView;
     int currentScore = 0, currentQuestion = 1;
     CountDownTimer countDownTimer;
-    public static ArrayList<QuestionModel> finalQuestionsList = new ArrayList<>();
-    String teamUid;
+    public static ArrayList<QuestionModel> firstRoundQuestionList = new ArrayList<>();
+    public static ArrayList<QuestionModel> secondRoundQuestionList = new ArrayList<>();
+    public static ArrayList<QuestionModel> thirdRoundQuestionList = new ArrayList<>();
+    public static ArrayList<QuestionModel> finalRoundQuestionList = new ArrayList<>();
+
+    public ArrayList<QuestionModel> currentQuestionList = new ArrayList<>();
+
+
+    String teamUid, round;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference teamRef = database.getReference("Answers Semi Final");
+    DatabaseReference currentRoundRef = database.getReference("Answers Round 1");
+    DatabaseReference firstRoundRef = database.getReference("Answers Round 1");
+    DatabaseReference secondRoundRef = database.getReference("Answers Round 2");
+    DatabaseReference thirdRoundRef = database.getReference("Answers Round 3");
+    DatabaseReference finalRoundRef = database.getReference("Answers Final Round");
+
     DatabaseReference teamNameRef = database.getReference("Team PINS");
 
     // Multiple choice things
@@ -57,6 +69,7 @@ public class ExamActivity extends AppCompatActivity {
         setContentView(R.layout.activity_exam);
 
         teamUid = getIntent().getStringExtra("id");
+        round = getIntent().getStringExtra("round");
 
         multipleChoiceView = findViewById(R.id.multiple_choice_view);
         trueOrFalseView = findViewById(R.id.true_or_false_view);
@@ -79,7 +92,20 @@ public class ExamActivity extends AppCompatActivity {
         Log.e("lol", "");
         //Collections.shuffle(finalQuestionsList);
 
-        if (finalQuestionsList.get(currentQuestion - 1).getQuestionType().equals("FB")) {
+        if (round.equals("firstRound")) {
+            currentQuestionList = firstRoundQuestionList;
+            currentRoundRef = firstRoundRef;
+        } else if (round.equals("secondRound")) {
+            currentQuestionList = secondRoundQuestionList;
+            currentRoundRef = secondRoundRef;
+        } else if (round.equals("thirdRound")) {
+            currentQuestionList = thirdRoundQuestionList;
+            currentRoundRef = thirdRoundRef;
+        } else {
+            currentQuestionList = finalRoundQuestionList;
+            currentRoundRef = finalRoundRef;
+        }
+        if (currentQuestionList.get(currentQuestion - 1).getQuestionType().equals("FB")) {
             countDownTimer = new CountDownTimer(120000, 1000) {
                 @Override
                 public void onTick(long l) {
@@ -91,6 +117,7 @@ public class ExamActivity extends AppCompatActivity {
                     timer.setText("0");
                     correctOrIncorrectTextView.setText("Se terminó el tiempo");
                     correctOrIncorrectImageView.setImageResource(R.drawable.ic_incorrect);
+                    endTmeSaveData(currentQuestion);
                     dialog.show();
                     currentQuestion++;
                 }
@@ -107,6 +134,7 @@ public class ExamActivity extends AppCompatActivity {
                     timer.setText("0");
                     correctOrIncorrectTextView.setText("Se terminó el tiempo");
                     correctOrIncorrectImageView.setImageResource(R.drawable.ic_incorrect);
+                    endTmeSaveData(currentQuestion);
                     dialog.show();
                     currentQuestion++;
                 }
@@ -150,12 +178,12 @@ public class ExamActivity extends AppCompatActivity {
         endExitButton = endDialog.findViewById(R.id.exit_button);
         endPoints = endDialog.findViewById(R.id.final_points_textView);
 
-        if (finalQuestionsList.get(currentQuestion - 1).getQuestionType().equals("MC")) {
+        if (currentQuestionList.get(currentQuestion - 1).getQuestionType().equals("MC")) {
             multipleChoiceView.setVisibility(View.VISIBLE);
             trueOrFalseView.setVisibility(View.GONE);
             fillInTheBlankAnswerEditText.setVisibility(View.GONE);
             enterFillInTheBlankAnswerButton.setVisibility(View.GONE);
-        } else if (finalQuestionsList.get(currentQuestion - 1).getQuestionType().equals("TF")) {
+        } else if (currentQuestionList.get(currentQuestion - 1).getQuestionType().equals("TF")) {
             multipleChoiceView.setVisibility(View.GONE);
             trueOrFalseView.setVisibility(View.VISIBLE);
             fillInTheBlankAnswerEditText.setVisibility(View.GONE);
@@ -175,15 +203,15 @@ public class ExamActivity extends AppCompatActivity {
         });
 
         nextQuestionButton.setOnClickListener(view -> {
-            if (currentQuestion <= finalQuestionsList.size()) {
+            if (currentQuestion <= currentQuestionList.size()) {
                 setDataToViews(currentQuestion);
 
-                if (finalQuestionsList.get(currentQuestion - 1).getQuestionType().equals("MC")) {
+                if (currentQuestionList.get(currentQuestion - 1).getQuestionType().equals("MC")) {
                     multipleChoiceView.setVisibility(View.VISIBLE);
                     trueOrFalseView.setVisibility(View.GONE);
                     fillInTheBlankAnswerEditText.setVisibility(View.GONE);
                     enterFillInTheBlankAnswerButton.setVisibility(View.GONE);
-                } else if (finalQuestionsList.get(currentQuestion - 1).getQuestionType().equals("TF")) {
+                } else if (currentQuestionList.get(currentQuestion - 1).getQuestionType().equals("TF")) {
                     multipleChoiceView.setVisibility(View.GONE);
                     trueOrFalseView.setVisibility(View.VISIBLE);
                     fillInTheBlankAnswerEditText.setVisibility(View.GONE);
@@ -199,7 +227,7 @@ public class ExamActivity extends AppCompatActivity {
 
                 //timer.setText("60");
 
-                if (finalQuestionsList.get(currentQuestion - 1).getQuestionType().equals("FB")) {
+                if (currentQuestionList.get(currentQuestion - 1).getQuestionType().equals("FB")) {
                     countDownTimer = new CountDownTimer(120000, 1000) {
                         @Override
                         public void onTick(long l) {
@@ -211,6 +239,7 @@ public class ExamActivity extends AppCompatActivity {
                             timer.setText("0");
                             correctOrIncorrectTextView.setText("Se terminó el tiempo");
                             correctOrIncorrectImageView.setImageResource(R.drawable.ic_incorrect);
+                            endTmeSaveData(currentQuestion);
                             dialog.show();
                             currentQuestion++;
 
@@ -228,6 +257,7 @@ public class ExamActivity extends AppCompatActivity {
                             timer.setText("0");
                             correctOrIncorrectTextView.setText("Se terminó el tiempo");
                             correctOrIncorrectImageView.setImageResource(R.drawable.ic_incorrect);
+                            endTmeSaveData(currentQuestion);
                             dialog.show();
                             currentQuestion++;
                         }
@@ -239,8 +269,8 @@ public class ExamActivity extends AppCompatActivity {
             } else {
                 // Place another dialog that tells the user that the exam has ended and with a
                 // button to go back to the MainActivity.
-                teamRef.child(teamUid).child("testDone").setValue("yes");
-                endPoints.setText(currentScore + " de " + finalQuestionsList.size());
+                currentRoundRef.child(teamUid).child("testDone").setValue("yes");
+                endPoints.setText(currentScore + " de " + currentQuestionList.size());
                 endDialog.show();
             }
         });
@@ -249,7 +279,14 @@ public class ExamActivity extends AppCompatActivity {
 
         enterFillInTheBlankAnswerButton.setOnClickListener(view -> {
             String answer = fillInTheBlankAnswerEditText.getText().toString();
-            teamRef.child(teamUid).child("answer" + currentQuestion).setValue(answer);
+            int timeElapsed = 120 - Integer.parseInt(timer.getText().toString());
+            if (currentQuestion < 10) {
+                currentRoundRef.child(teamUid).child("answer" + "0" + currentQuestion).child("answer").setValue(answer);
+                currentRoundRef.child(teamUid).child("answer" + "0" + currentQuestion).child("tiempo transcurrido").setValue(String.valueOf(timeElapsed));
+            } else {
+                currentRoundRef.child(teamUid).child("answer" + currentQuestion).child("answer").setValue(answer);
+                currentRoundRef.child(teamUid).child("answer" + currentQuestion).child("tiempo transcurrido").setValue(String.valueOf(timeElapsed));
+            }
 
             correctOrIncorrectTextView.setText("Tu respuesta será calificada más tarde");
             correctOrIncorrectImageView.setImageResource(R.drawable.pending_icon);
@@ -260,15 +297,30 @@ public class ExamActivity extends AppCompatActivity {
         });
 
         trueButton.setOnClickListener(view -> {
-            if (finalQuestionsList.get(currentQuestion - 1).getOption2().equals(finalQuestionsList.get(currentQuestion - 1).getAnswer())) {
-                teamRef.child(teamUid).child("answer" + currentQuestion).setValue(finalQuestionsList.get(currentQuestion - 1).getOption2());
+            int timeElapsed = 60 - Integer.parseInt(timer.getText().toString());
+            if (currentQuestionList.get(currentQuestion - 1).getOption2().equals(currentQuestionList.get(currentQuestion - 1).getAnswer())) {
+                if (currentQuestion < 10) {
+                    currentRoundRef.child(teamUid).child("answer" + "0" + currentQuestion).child("answer").setValue(currentQuestionList.get(currentQuestion - 1).getOption2());
+                    currentRoundRef.child(teamUid).child("answer" + "0" + currentQuestion).child("tiempo transcurrido").setValue(String.valueOf(timeElapsed));
+                } else {
+                    currentRoundRef.child(teamUid).child("answer" + currentQuestion).child("answer").setValue(currentQuestionList.get(currentQuestion - 1).getOption2());
+                    currentRoundRef.child(teamUid).child("answer" + currentQuestion).child("tiempo transcurrido").setValue(String.valueOf(timeElapsed));
+                }
                 currentScore++;
                 scoreTextView.setText("Puntos: " + currentScore);
                 correctOrIncorrectTextView.setText("¡Respuesta Correcta!");
                 correctOrIncorrectImageView.setImageResource(R.drawable.ic_correct);
                 dialog.show();
             } else {
-                teamRef.child(teamUid).child("answer" + currentQuestion).setValue(finalQuestionsList.get(currentQuestion - 1).getOption2());
+                if (currentQuestion < 10) {
+                    currentRoundRef.child(teamUid).child("answer" + "0" + currentQuestion).child("answer").setValue(currentQuestionList.get(currentQuestion - 1).getOption2());
+                    currentRoundRef.child(teamUid).child("answer" + "0" + currentQuestion).child("tiempo transcurrido").setValue(String.valueOf(timeElapsed));
+
+                } else {
+                    currentRoundRef.child(teamUid).child("answer" + currentQuestion).child("answer").setValue(currentQuestionList.get(currentQuestion - 1).getOption2());
+                    currentRoundRef.child(teamUid).child("answer" + currentQuestion).child("tiempo transcurrido").setValue(String.valueOf(timeElapsed));
+
+                }
                 correctOrIncorrectTextView.setText("Respuesta Incorrecta");
                 correctOrIncorrectImageView.setImageResource(R.drawable.ic_incorrect);
                 dialog.show();
@@ -280,15 +332,32 @@ public class ExamActivity extends AppCompatActivity {
         });
 
         falseButton.setOnClickListener(view -> {
-            if (finalQuestionsList.get(currentQuestion - 1).getOption1().equals(finalQuestionsList.get(currentQuestion - 1).getAnswer())) {
-                teamRef.child(teamUid).child("answer" + currentQuestion).setValue(finalQuestionsList.get(currentQuestion - 1).getOption1());
+            int timeElapsed = 60 - Integer.parseInt(timer.getText().toString());
+            if (currentQuestionList.get(currentQuestion - 1).getOption1().equals(currentQuestionList.get(currentQuestion - 1).getAnswer())) {
+                if (currentQuestion < 10) {
+                    currentRoundRef.child(teamUid).child("answer" + "0" + currentQuestion).child("answer").setValue(currentQuestionList.get(currentQuestion - 1).getOption1());
+                    currentRoundRef.child(teamUid).child("answer" + "0" + currentQuestion).child("tiempo transcurrido").setValue(String.valueOf(timeElapsed));
+
+                } else {
+                    currentRoundRef.child(teamUid).child("answer" + currentQuestion).child("answer").setValue(currentQuestionList.get(currentQuestion - 1).getOption1());
+                    currentRoundRef.child(teamUid).child("answer" + currentQuestion).child("tiempo transcurrido").setValue(String.valueOf(timeElapsed));
+
+                }
                 currentScore++;
                 scoreTextView.setText("Puntos: " + currentScore);
                 correctOrIncorrectTextView.setText("¡Respuesta Correcta!");
                 correctOrIncorrectImageView.setImageResource(R.drawable.ic_correct);
                 dialog.show();
             } else {
-                teamRef.child(teamUid).child("answer" + currentQuestion).setValue(finalQuestionsList.get(currentQuestion - 1).getOption1());
+                if (currentQuestion < 10) {
+                    currentRoundRef.child(teamUid).child("answer" + "0" + currentQuestion).child("answer").setValue(currentQuestionList.get(currentQuestion - 1).getOption1());
+                    currentRoundRef.child(teamUid).child("answer" + "0" + currentQuestion).child("tiempo transcurrido").setValue(String.valueOf(timeElapsed));
+
+                } else {
+                    currentRoundRef.child(teamUid).child("answer" + currentQuestion).child("answer").setValue(currentQuestionList.get(currentQuestion - 1).getOption1());
+                    currentRoundRef.child(teamUid).child("answer" + currentQuestion).child("tiempo transcurrido").setValue(String.valueOf(timeElapsed));
+
+                }
                 correctOrIncorrectTextView.setText("Respuesta Incorrecta");
                 correctOrIncorrectImageView.setImageResource(R.drawable.ic_incorrect);
                 dialog.show();
@@ -300,15 +369,32 @@ public class ExamActivity extends AppCompatActivity {
         });
 
         option1Button.setOnClickListener(view -> {
-            if (finalQuestionsList.get(currentQuestion - 1).getOption1().equals(finalQuestionsList.get(currentQuestion - 1).getAnswer())) {
-                teamRef.child(teamUid).child("answer" + currentQuestion).setValue(finalQuestionsList.get(currentQuestion - 1).getOption1());
+            int timeElapsed = 60 - Integer.parseInt(timer.getText().toString());
+            if (currentQuestionList.get(currentQuestion - 1).getOption1().equals(currentQuestionList.get(currentQuestion - 1).getAnswer())) {
+                if (currentQuestion < 10) {
+                    currentRoundRef.child(teamUid).child("answer" + "0" + currentQuestion).child("answer").setValue(currentQuestionList.get(currentQuestion - 1).getOption1());
+                    currentRoundRef.child(teamUid).child("answer" + "0" + currentQuestion).child("tiempo transcurrido").setValue(String.valueOf(timeElapsed));
+
+                } else {
+                    currentRoundRef.child(teamUid).child("answer" + currentQuestion).child("answer").setValue(currentQuestionList.get(currentQuestion - 1).getOption1());
+                    currentRoundRef.child(teamUid).child("answer" + currentQuestion).child("tiempo transcurrido").setValue(String.valueOf(timeElapsed));
+
+                }
                 currentScore++;
                 scoreTextView.setText("Puntos: " + currentScore);
                 correctOrIncorrectTextView.setText("¡Respuesta Correcta!");
                 correctOrIncorrectImageView.setImageResource(R.drawable.ic_correct);
                 dialog.show();
             } else {
-                teamRef.child(teamUid).child("answer" + currentQuestion).setValue(finalQuestionsList.get(currentQuestion - 1).getOption1());
+                if (currentQuestion < 10) {
+                    currentRoundRef.child(teamUid).child("answer" + "0" + currentQuestion).child("answer").setValue(currentQuestionList.get(currentQuestion - 1).getOption1());
+                    currentRoundRef.child(teamUid).child("answer" + "0" + currentQuestion).child("tiempo transcurrido").setValue(String.valueOf(timeElapsed));
+
+                } else {
+                    currentRoundRef.child(teamUid).child("answer" + currentQuestion).child("answer").setValue(currentQuestionList.get(currentQuestion - 1).getOption1());
+                    currentRoundRef.child(teamUid).child("answer" + currentQuestion).child("tiempo transcurrido").setValue(String.valueOf(timeElapsed));
+
+                }
                 correctOrIncorrectTextView.setText("Respuesta Incorrecta");
                 correctOrIncorrectImageView.setImageResource(R.drawable.ic_incorrect);
                 dialog.show();
@@ -319,27 +405,41 @@ public class ExamActivity extends AppCompatActivity {
             //timer.setText("60");
 
             /**if (currentQuestion <= practiceFragment.finalQuestionsList.size()) {
-                setDataToViews(currentQuestion);
-            } else {
-                // Place another dialog that tells the user that the exam has ended and with a
-                // button to go back to the MainActivity.
-                Toast.makeText(getApplicationContext(), "Fin de Examen", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-            }*/
+             setDataToViews(currentQuestion);
+             } else {
+             // Place another dialog that tells the user that the exam has ended and with a
+             // button to go back to the MainActivity.
+             Toast.makeText(getApplicationContext(), "Fin de Examen", Toast.LENGTH_SHORT).show();
+             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+             startActivity(intent);
+             }*/
 
         });
 
         option2Button.setOnClickListener(view -> {
-            if (finalQuestionsList.get(currentQuestion - 1).getOption2().equals(finalQuestionsList.get(currentQuestion - 1).getAnswer())) {
-                teamRef.child(teamUid).child("answer" + currentQuestion).setValue(finalQuestionsList.get(currentQuestion - 1).getOption2());
+            int timeElapsed = 60 - Integer.parseInt(timer.getText().toString());
+            if (currentQuestionList.get(currentQuestion - 1).getOption2().equals(currentQuestionList.get(currentQuestion - 1).getAnswer())) {
+                if (currentQuestion < 10) {
+                    currentRoundRef.child(teamUid).child("answer" + "0" + currentQuestion).child("answer").setValue(currentQuestionList.get(currentQuestion - 1).getOption2());
+                    currentRoundRef.child(teamUid).child("answer" + "0" + currentQuestion).child("tiempo transcurrido").setValue(String.valueOf(timeElapsed));
+
+                } else {
+                    currentRoundRef.child(teamUid).child("answer" + currentQuestion).child("answer").setValue(currentQuestionList.get(currentQuestion - 1).getOption2());
+                    currentRoundRef.child(teamUid).child("answer" + currentQuestion).child("tiempo transcurrido").setValue(String.valueOf(timeElapsed));
+                }
                 currentScore++;
                 scoreTextView.setText("Puntos: " + currentScore);
                 correctOrIncorrectTextView.setText("¡Respuesta Correcta!");
                 correctOrIncorrectImageView.setImageResource(R.drawable.ic_correct);
                 dialog.show();
             } else {
-                teamRef.child(teamUid).child("answer" + currentQuestion).setValue(finalQuestionsList.get(currentQuestion - 1).getOption2());
+                if (currentQuestion < 10) {
+                    currentRoundRef.child(teamUid).child("answer" + "0" + currentQuestion).child("answer").setValue(currentQuestionList.get(currentQuestion - 1).getOption2());
+                    currentRoundRef.child(teamUid).child("answer" + "0" + currentQuestion).child("tiempo transcurrido").setValue(String.valueOf(timeElapsed));
+                } else {
+                    currentRoundRef.child(teamUid).child("answer" + currentQuestion).child("answer").setValue(currentQuestionList.get(currentQuestion - 1).getOption2());
+                    currentRoundRef.child(teamUid).child("answer" + currentQuestion).child("tiempo transcurrido").setValue(String.valueOf(timeElapsed));
+                }
                 correctOrIncorrectTextView.setText("Respuesta Incorrecta");
                 correctOrIncorrectImageView.setImageResource(R.drawable.ic_incorrect);
                 dialog.show();
@@ -350,24 +450,37 @@ public class ExamActivity extends AppCompatActivity {
             //timer.setText("60");
 
             /**if (currentQuestion <= practiceFragment.finalQuestionsList.size()) {
-                setDataToViews(currentQuestion);
-            } else {
-                Toast.makeText(getApplicationContext(), "Fin de Examen", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-            }*/
+             setDataToViews(currentQuestion);
+             } else {
+             Toast.makeText(getApplicationContext(), "Fin de Examen", Toast.LENGTH_SHORT).show();
+             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+             startActivity(intent);
+             }*/
         });
 
         option3Button.setOnClickListener(view -> {
-            if (finalQuestionsList.get(currentQuestion - 1).getOption3().equals(finalQuestionsList.get(currentQuestion - 1).getAnswer())) {
-                teamRef.child(teamUid).child("answer" + currentQuestion).setValue(finalQuestionsList.get(currentQuestion - 1).getOption3());
+            int timeElapsed = 60 - Integer.parseInt(timer.getText().toString());
+            if (currentQuestionList.get(currentQuestion - 1).getOption3().equals(currentQuestionList.get(currentQuestion - 1).getAnswer())) {
+                if (currentQuestion < 10) {
+                    currentRoundRef.child(teamUid).child("answer" + "0" + currentQuestion).child("answer").setValue(currentQuestionList.get(currentQuestion - 1).getOption3());
+                    currentRoundRef.child(teamUid).child("answer" + "0" + currentQuestion).child("tiempo transcurrido").setValue(String.valueOf(timeElapsed));
+                } else {
+                    currentRoundRef.child(teamUid).child("answer" + currentQuestion).child("answer").setValue(currentQuestionList.get(currentQuestion - 1).getOption3());
+                    currentRoundRef.child(teamUid).child("answer" + currentQuestion).child("tiempo transcurrido").setValue(String.valueOf(timeElapsed));
+                }
                 currentScore++;
                 scoreTextView.setText("Puntos: " + currentScore);
                 correctOrIncorrectTextView.setText("¡Respuesta Correcta!");
                 correctOrIncorrectImageView.setImageResource(R.drawable.ic_correct);
                 dialog.show();
             } else {
-                teamRef.child(teamUid).child("answer" + currentQuestion).setValue(finalQuestionsList.get(currentQuestion - 1).getOption3());
+                if (currentQuestion < 10) {
+                    currentRoundRef.child(teamUid).child("answer" + "0" + currentQuestion).child("answer").setValue(currentQuestionList.get(currentQuestion - 1).getOption3());
+                    currentRoundRef.child(teamUid).child("answer" + "0" + currentQuestion).child("tiempo transcurrido").setValue(String.valueOf(timeElapsed));
+                } else {
+                    currentRoundRef.child(teamUid).child("answer" + currentQuestion).child("answer").setValue(currentQuestionList.get(currentQuestion - 1).getOption3());
+                    currentRoundRef.child(teamUid).child("answer" + currentQuestion).child("tiempo transcurrido").setValue(String.valueOf(timeElapsed));
+                }
                 correctOrIncorrectTextView.setText("Respuesta Incorrecta");
                 correctOrIncorrectImageView.setImageResource(R.drawable.ic_incorrect);
                 dialog.show();
@@ -378,24 +491,37 @@ public class ExamActivity extends AppCompatActivity {
             //timer.setText("60");
 
             /**if (currentQuestion <= practiceFragment.finalQuestionsList.size()) {
-                setDataToViews(currentQuestion);
-            } else {
-                Toast.makeText(getApplicationContext(), "Fin de Examen", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-            }*/
+             setDataToViews(currentQuestion);
+             } else {
+             Toast.makeText(getApplicationContext(), "Fin de Examen", Toast.LENGTH_SHORT).show();
+             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+             startActivity(intent);
+             }*/
         });
 
         option4Button.setOnClickListener(view -> {
-            if (finalQuestionsList.get(currentQuestion - 1).getOption4().equals(finalQuestionsList.get(currentQuestion - 1).getAnswer())) {
-                teamRef.child(teamUid).child("answer" + currentQuestion).setValue(finalQuestionsList.get(currentQuestion - 1).getOption4());
+            int timeElapsed = 60 - Integer.parseInt(timer.getText().toString());
+            if (currentQuestionList.get(currentQuestion - 1).getOption4().equals(currentQuestionList.get(currentQuestion - 1).getAnswer())) {
+                if (currentQuestion < 10) {
+                    currentRoundRef.child(teamUid).child("answer" + "0" + currentQuestion).child("answer").setValue(currentQuestionList.get(currentQuestion - 1).getOption4());
+                    currentRoundRef.child(teamUid).child("answer" + "0" + currentQuestion).child("tiempo transcurrido").setValue(String.valueOf(timeElapsed));
+                } else {
+                    currentRoundRef.child(teamUid).child("answer" + currentQuestion).child("answer").setValue(currentQuestionList.get(currentQuestion - 1).getOption4());
+                    currentRoundRef.child(teamUid).child("answer" + currentQuestion).child("tiempo transcurrido").setValue(String.valueOf(timeElapsed));
+                }
                 currentScore++;
                 scoreTextView.setText("Puntos: " + currentScore);
                 correctOrIncorrectTextView.setText("¡Respuesta Correcta!");
                 correctOrIncorrectImageView.setImageResource(R.drawable.ic_correct);
                 dialog.show();
             } else {
-                teamRef.child(teamUid).child("answer" + currentQuestion).setValue(finalQuestionsList.get(currentQuestion - 1).getOption4());
+                if (currentQuestion < 10) {
+                    currentRoundRef.child(teamUid).child("answer" + "0" + currentQuestion).child("answer").setValue(currentQuestionList.get(currentQuestion - 1).getOption4());
+                    currentRoundRef.child(teamUid).child("answer" + "0" + currentQuestion).child("tiempo transcurrido").setValue(String.valueOf(timeElapsed));
+                } else {
+                    currentRoundRef.child(teamUid).child("answer" + currentQuestion).child("answer").setValue(currentQuestionList.get(currentQuestion - 1).getOption4());
+                    currentRoundRef.child(teamUid).child("answer" + currentQuestion).child("tiempo transcurrido").setValue(String.valueOf(timeElapsed));
+                }
                 correctOrIncorrectTextView.setText("Respuesta Incorrecta");
                 correctOrIncorrectImageView.setImageResource(R.drawable.ic_incorrect);
                 dialog.show();
@@ -406,28 +532,51 @@ public class ExamActivity extends AppCompatActivity {
             //timer.setText("60");
 
             /**if (currentQuestion <= practiceFragment.finalQuestionsList.size()) {
-                setDataToViews(currentQuestion);
-            } else {
-                Toast.makeText(getApplicationContext(), "Fin de Examen", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-            }*/
+             setDataToViews(currentQuestion);
+             } else {
+             Toast.makeText(getApplicationContext(), "Fin de Examen", Toast.LENGTH_SHORT).show();
+             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+             startActivity(intent);
+             }*/
         });
 
 
     }
 
     public void setDataToViews(int currentQuestion) {
-        questionTextView.setText(finalQuestionsList.get(currentQuestion - 1).getQuestion());
+        questionTextView.setText(currentQuestionList.get(currentQuestion - 1).getQuestion());
         scoreTextView.setText("Puntos: " + currentScore);
-        option1Button.setText("A) " + finalQuestionsList.get(currentQuestion - 1).getOption1());
-        option2Button.setText("B) " + finalQuestionsList.get(currentQuestion - 1).getOption2());
-        option3Button.setText("C) " + finalQuestionsList.get(currentQuestion - 1).getOption3());
-        option4Button.setText("D) " + finalQuestionsList.get(currentQuestion - 1).getOption4());
-        questionNumberTextView.setText(currentQuestion + " de " + finalQuestionsList.size());
+        option1Button.setText("A) " + currentQuestionList.get(currentQuestion - 1).getOption1());
+        option2Button.setText("B) " + currentQuestionList.get(currentQuestion - 1).getOption2());
+        option3Button.setText("C) " + currentQuestionList.get(currentQuestion - 1).getOption3());
+        option4Button.setText("D) " + currentQuestionList.get(currentQuestion - 1).getOption4());
+        questionNumberTextView.setText(currentQuestion + " de " + currentQuestionList.size());
     }
 
     @Override
     public void onBackPressed() {
+    }
+
+    public void endTmeSaveData(int currentQuestion) {
+        if (currentQuestionList.get(currentQuestion - 1).getQuestionType().equals("FB")) {
+            // Save whatever text is currently on the editTextView as soon as the timer runs out.
+            String answer = fillInTheBlankAnswerEditText.getText().toString();
+            if (currentQuestion < 10) {
+                currentRoundRef.child(teamUid).child("answer" + "0" + currentQuestion).child("answer").setValue(answer);
+                currentRoundRef.child(teamUid).child("answer" + "0" + currentQuestion).child("tiempo transcurrido").setValue("120");
+            } else {
+                currentRoundRef.child(teamUid).child("answer" + currentQuestion).child("answer").setValue(answer);
+                currentRoundRef.child(teamUid).child("answer" + currentQuestion).child("tiempo transcurrido").setValue("120");
+            }
+        } else {
+            if (currentQuestion < 10) {
+                currentRoundRef.child(teamUid).child("answer" + "0" + currentQuestion).child("answer").setValue("No respondió a tiempo");
+                currentRoundRef.child(teamUid).child("answer" + "0" + currentQuestion).child("tiempo transcurrido").setValue("60");
+            } else {
+                currentRoundRef.child(teamUid).child("answer" + currentQuestion).child("answer").setValue("No respondió a tiempo");
+                currentRoundRef.child(teamUid).child("answer" + currentQuestion).child("tiempo transcurrido").setValue("60");
+            }
+        }
+
     }
 }

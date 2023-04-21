@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -23,19 +22,17 @@ import com.google.firebase.database.ValueEventListener;
 public class MainActivity extends AppCompatActivity {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    FirebaseDatabase database2 = FirebaseDatabase.getInstance();
-    FirebaseDatabase database3 = FirebaseDatabase.getInstance();
 
     DatabaseReference teamsRef = database.getReference("Team PINS");
-    DatabaseReference checkRef;
-    DatabaseReference waitRef = database3.getReference("Admin");
+    DatabaseReference secondRoundExamRef, thirdRoundExamRef, finalRoundExamRef;
+    //DatabaseReference checkRef;
+    //DatabaseReference waitRef = database.getReference("Admin");
 
     Button startExamButton, adminButton;
     EditText pinEditText;
     TextView waitTextView, instructionsTextView;
 
-    DatabaseReference semiFinalExamRef, finalExamRef;
-    ExamActivity examActivity;
+    DatabaseReference firstRoundExamRef, finalExamRef;
     FinalExamActivity finalExamActivity;
     QuestionModel questionModel;
 
@@ -46,14 +43,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        semiFinalExamRef = database.getReference("ExamSemiFinal");
+        firstRoundExamRef = database.getReference("Exam Round 1");
+        secondRoundExamRef = database.getReference("Exam Round 2");
+        thirdRoundExamRef = database.getReference("Exam Round 3");
+        finalRoundExamRef = database.getReference("Exam Final Round");
+
         finalExamRef = database.getReference("ExamFinal");
 
         pinEditText = findViewById(R.id.team_pin_edit_text);
         waitTextView = findViewById(R.id.wait_text_view);
         instructionsTextView = findViewById(R.id.instructions_text_view);
 
-        waitRef.child("testOpen").addValueEventListener(new ValueEventListener() {
+        /**waitRef.child("testOpen").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 wait = snapshot.getValue(String.class);
@@ -77,27 +78,27 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        });*/
 
         Log.e("boo", "is test open? " + wait);
 
 
 
-        semiFinalExamRef.addValueEventListener(new ValueEventListener() {
+        firstRoundExamRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                examActivity.finalQuestionsList.clear();
+                ExamActivity.firstRoundQuestionList.clear();
 
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     questionModel = ds.getValue(QuestionModel.class);
-                    examActivity.finalQuestionsList.add(questionModel);
+                    ExamActivity.firstRoundQuestionList.add(questionModel);
                 }
 
                 //QuestionModel questionModel = snapshot.child("Pregunta 1").getValue(QuestionModel.class);
                 //finalQuestionsList.add(questionModel);
                 //question = snapshot.child("Pregunta 1").getValue(String.class);
 
-                Log.e("cat", examActivity.finalQuestionsList.get(0).question);
+                Log.e("cat", ExamActivity.firstRoundQuestionList.get(0).question);
 
             }
 
@@ -107,21 +108,69 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        finalExamRef.addValueEventListener(new ValueEventListener() {
+        secondRoundExamRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                finalExamActivity.finalQuestionsList.clear();
+                ExamActivity.secondRoundQuestionList.clear();
 
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     questionModel = ds.getValue(QuestionModel.class);
-                    finalExamActivity.finalQuestionsList.add(questionModel);
+                    ExamActivity.secondRoundQuestionList.add(questionModel);
                 }
 
                 //QuestionModel questionModel = snapshot.child("Pregunta 1").getValue(QuestionModel.class);
                 //finalQuestionsList.add(questionModel);
                 //question = snapshot.child("Pregunta 1").getValue(String.class);
 
-                //Log.e("cat", examActivity.finalQuestionsList.get(0).question);
+                Log.e("cat", ExamActivity.secondRoundQuestionList.get(0).question);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        thirdRoundExamRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ExamActivity.thirdRoundQuestionList.clear();
+
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    questionModel = ds.getValue(QuestionModel.class);
+                    ExamActivity.thirdRoundQuestionList.add(questionModel);
+                }
+
+                //QuestionModel questionModel = snapshot.child("Pregunta 1").getValue(QuestionModel.class);
+                //finalQuestionsList.add(questionModel);
+                //question = snapshot.child("Pregunta 1").getValue(String.class);
+
+                Log.e("cat", ExamActivity.thirdRoundQuestionList.get(0).question);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        finalRoundExamRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                FinalExamActivity.finalQuestionsList.clear();
+
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    questionModel = ds.getValue(QuestionModel.class);
+                    FinalExamActivity.finalQuestionsList.add(questionModel);
+                }
+
+                //QuestionModel questionModel = snapshot.child("Pregunta 1").getValue(QuestionModel.class);
+                //finalQuestionsList.add(questionModel);
+                //question = snapshot.child("Pregunta 1").getValue(String.class);
+
+                Log.e("cat", FinalExamActivity.finalQuestionsList.get(0).question);
 
             }
 
@@ -137,9 +186,9 @@ public class MainActivity extends AppCompatActivity {
         startExamButton.setOnClickListener(view -> {
 
             String id = pinEditText.getText().toString();
-            checkRef = database2.getReference("Answers").child(id).child("testDone");
+            //checkRef = database.getReference("Answers").child(id).child("testDone");
 
-            checkRef.addValueEventListener(new ValueEventListener() {
+            /**checkRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     checkTestDone = snapshot.getValue(String.class);
@@ -151,7 +200,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-            });
+            });*/
 
             if (TextUtils.isEmpty(id)) {
                 Toast.makeText(getApplicationContext(), "Por favor escribe tu PIN de equipo", Toast.LENGTH_SHORT).show();
@@ -173,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-
+                        Toast.makeText(getApplicationContext(), "Verifica tu conexión", Toast.LENGTH_SHORT).show();
                     }
                 });
             }

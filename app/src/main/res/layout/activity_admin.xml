@@ -16,7 +16,7 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/round_background_2"
         android:fontFamily="@font/open_sans_bold"
-        android:text="Generar Examen 1RC"
+        android:text="Generar Examen Primera Ronda"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,7 +32,7 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/round_background_2"
         android:fontFamily="@font/open_sans_bold"
-        android:text="Generar Examen 2RC"
+        android:text="Generar Examen Segunda Ronda"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,30 +49,13 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/round_background_2"
         android:fontFamily="@font/open_sans_bold"
-        android:text="Generar Examen 3RC"
+        android:text="Generar Examen Tercera Ronda"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/generate_2rc_exam_button" />
-
-    <Button
-        android:id="@+id/generate_semi_final_exam_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/round_background_2"
-        android:fontFamily="@font/open_sans_bold"
-        android:text="Generar Examen Semi Final"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/generate_3rc_exam_button" />
 
     <Button
         android:id="@+id/generate_final_exam_button"
@@ -89,5 +72,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/generate_semi_final_exam_button" />
+        app:layout_constraintTop_toBottomOf="@+id/generate_3rc_exam_button" />
 </androidx.constraintlayout.widget.ConstraintLayout>

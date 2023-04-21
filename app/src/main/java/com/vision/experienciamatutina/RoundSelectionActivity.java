@@ -17,11 +17,11 @@ import com.google.firebase.database.ValueEventListener;
 
 public class RoundSelectionActivity extends AppCompatActivity {
 
-    Button qualificationButton, semiFinalButton, finalButton;
+    Button firstRoundButton, secondRoundButton, thirdRoundButton, finalRoundButton;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference checkRef, checkRefFinal;
+    DatabaseReference checkRound1, checkRound2, checkRound3, checkFinalRound;
 
-    String checkTestDone, checkTestDoneFinal, teamUid;
+    String firstRoundDone, secondRoundDone, thirdRoundDone, finalRoundDone, teamUid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,66 +29,122 @@ public class RoundSelectionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_round_selection);
 
         teamUid = getIntent().getStringExtra("id");
-        checkRef = database.getReference("Answers Semi Final").child(teamUid).child("testDone");
-        checkRefFinal = database.getReference("Answers Final").child(teamUid).child("testDone");
+        checkRound1 = database.getReference("Answers Round 1").child(teamUid).child("testDone");
+        checkRound2 = database.getReference("Answers Round 2").child(teamUid).child("testDone");
+        checkRound3 = database.getReference("Answers Round 3").child(teamUid).child("testDone");
+        checkFinalRound = database.getReference("Answers Final Round").child(teamUid).child("testDone");
 
-        checkRef.addValueEventListener(new ValueEventListener() {
+        checkRound1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                checkTestDone = snapshot.getValue(String.class);
+                firstRoundDone = snapshot.getValue(String.class);
                 Log.e("lol", "is test done? " + snapshot);
-
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
 
-        checkRefFinal.addValueEventListener(new ValueEventListener() {
+        checkRound2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                checkTestDoneFinal = snapshot.getValue(String.class);
+                secondRoundDone = snapshot.getValue(String.class);
                 Log.e("lol", "is test done? " + snapshot);
-
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
 
-        qualificationButton = findViewById(R.id.qualification_button);
-        semiFinalButton = findViewById(R.id.semi_final_button);
-        finalButton = findViewById(R.id.final_button);
+        checkRound3.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                thirdRoundDone = snapshot.getValue(String.class);
+                Log.e("lol", "is test done? " + snapshot);
+            }
 
-        qualificationButton.setOnClickListener(view -> {
-
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
         });
 
-        semiFinalButton.setOnClickListener(view -> {
-            if (checkTestDone.equals("no")) {
+        checkFinalRound.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                finalRoundDone = snapshot.getValue(String.class);
+                Log.e("lol", "is test done? " + snapshot);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+        firstRoundButton = findViewById(R.id.first_round_button);
+        secondRoundButton = findViewById(R.id.second_round_button);
+        thirdRoundButton = findViewById(R.id.third_round_button);
+        finalRoundButton = findViewById(R.id.final_round_button);
+
+        firstRoundButton.setOnClickListener(view -> {
+
+            if (firstRoundDone.equals("no")) {
                 Toast.makeText(getApplicationContext(), "Bienvenidos", Toast.LENGTH_SHORT).show();
 
                 // Starts the ExamActivity
                 Intent intent = new Intent(getApplicationContext(), ExamActivity.class);
                 intent.putExtra("id", teamUid);
+                intent.putExtra("round", "firstRound");
+
                 startActivity(intent);
             } else {
                 Toast.makeText(getApplicationContext(), "Ya han hecho el examen", Toast.LENGTH_SHORT).show();
             }
-
         });
 
-        finalButton.setOnClickListener(view -> {
-            if (checkTestDoneFinal.equals("no")) {
+        secondRoundButton.setOnClickListener(view -> {
+
+            if (secondRoundDone.equals("no")) {
+                Toast.makeText(getApplicationContext(), "Bienvenidos", Toast.LENGTH_SHORT).show();
+
+                // Starts the ExamActivity
+                Intent intent = new Intent(getApplicationContext(), ExamActivity.class);
+                intent.putExtra("id", teamUid);
+                intent.putExtra("round", "secondRound");
+
+                startActivity(intent);
+            } else {
+                Toast.makeText(getApplicationContext(), "Ya han hecho el examen", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        thirdRoundButton.setOnClickListener(view -> {
+
+            if (thirdRoundDone.equals("no")) {
+                Toast.makeText(getApplicationContext(), "Bienvenidos", Toast.LENGTH_SHORT).show();
+
+                // Starts the ExamActivity
+                Intent intent = new Intent(getApplicationContext(), ExamActivity.class);
+                intent.putExtra("id", teamUid);
+                intent.putExtra("round", "thirdRound");
+
+                startActivity(intent);
+            } else {
+                Toast.makeText(getApplicationContext(), "Ya han hecho el examen", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        finalRoundButton.setOnClickListener(view -> {
+
+            if (finalRoundDone.equals("no")) {
                 Toast.makeText(getApplicationContext(), "Bienvenidos", Toast.LENGTH_SHORT).show();
 
                 // Starts the ExamActivity
                 Intent intent = new Intent(getApplicationContext(), FinalExamActivity.class);
                 intent.putExtra("id", teamUid);
+                intent.putExtra("round", "finalRound");
+
                 startActivity(intent);
             } else {
                 Toast.makeText(getApplicationContext(), "Ya han hecho el examen", Toast.LENGTH_SHORT).show();
