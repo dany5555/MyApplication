@@ -23,12 +23,12 @@ public class MainActivity extends AppCompatActivity {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-    DatabaseReference teamsRef = database.getReference("Team PINS");
+    DatabaseReference participantPinsRef = database.getReference("Participants");
     DatabaseReference secondRoundExamRef, thirdRoundExamRef, finalRoundExamRef;
     //DatabaseReference checkRef;
     //DatabaseReference waitRef = database.getReference("Admin");
 
-    Button startExamButton, adminButton;
+    Button loginButton, adminButton;
     EditText pinEditText;
     TextView waitTextView, instructionsTextView;
 
@@ -180,10 +180,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        startExamButton = findViewById(R.id.start_exam_button);
+        loginButton = findViewById(R.id.start_exam_button);
         adminButton = findViewById(R.id.admin_button);
 
-        startExamButton.setOnClickListener(view -> {
+        loginButton.setOnClickListener(view -> {
 
             String id = pinEditText.getText().toString();
             //checkRef = database.getReference("Answers").child(id).child("testDone");
@@ -203,13 +203,21 @@ public class MainActivity extends AppCompatActivity {
             });*/
 
             if (TextUtils.isEmpty(id)) {
-                Toast.makeText(getApplicationContext(), "Por favor escribe tu PIN de equipo", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Por favor escribe tu PIN", Toast.LENGTH_SHORT).show();
             } else {
-                teamsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                participantPinsRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.hasChild(id)) {
                                 Toast.makeText(getApplicationContext(), "Bienvenidos", Toast.LENGTH_SHORT).show();
+                                String part = String.valueOf(snapshot.child("parte"));
+
+                                if (part == "Parte A") {
+                                    // Start round selection activity for Part A.
+
+                                } else {
+                                    // Start round selection activity for Part B.
+                                }
 
                                 // Starts the ExamActivity
                                 Intent intent = new Intent(getApplicationContext(), RoundSelectionActivity.class);
