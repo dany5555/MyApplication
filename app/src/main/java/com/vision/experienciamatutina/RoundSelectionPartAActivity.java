@@ -15,7 +15,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class RoundSelectionActivity extends AppCompatActivity {
+public class RoundSelectionPartAActivity extends AppCompatActivity {
 
     Button firstRoundButton, secondRoundButton, thirdRoundButton, finalRoundButton;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -26,7 +26,7 @@ public class RoundSelectionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_round_selection);
+        setContentView(R.layout.activity_round_selection_parte_a);
 
         teamUid = getIntent().getStringExtra("id");
         checkRound1 = database.getReference("Answers Round 1").child(teamUid).child("testDone");

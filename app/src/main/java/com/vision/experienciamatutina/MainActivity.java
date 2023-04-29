@@ -211,18 +211,20 @@ public class MainActivity extends AppCompatActivity {
                         if (snapshot.hasChild(id)) {
                                 Toast.makeText(getApplicationContext(), "Bienvenidos", Toast.LENGTH_SHORT).show();
                                 String part = String.valueOf(snapshot.child("parte"));
+                                Log.e("boo", part);
 
                                 if (part == "Parte A") {
                                     // Start round selection activity for Part A.
+                                    Intent intent = new Intent(getApplicationContext(), RoundSelectionPartAActivity.class);
+                                    intent.putExtra("id", id);
+                                    startActivity(intent);
 
-                                } else {
+                                } else if (part == "Parte B"){
                                     // Start round selection activity for Part B.
+                                    Intent intent = new Intent(getApplicationContext(), RoundSelectionPartBActivity.class);
+                                    intent.putExtra("id", id);
+                                    startActivity(intent);
                                 }
-
-                                // Starts the ExamActivity
-                                Intent intent = new Intent(getApplicationContext(), RoundSelectionActivity.class);
-                                intent.putExtra("id", id);
-                                startActivity(intent);
                         } else {
                             Toast.makeText(getApplicationContext(), "Por favor escribe un PIN válido", Toast.LENGTH_SHORT).show();
                         }
