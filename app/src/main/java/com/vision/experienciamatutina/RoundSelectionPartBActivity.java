@@ -26,7 +26,7 @@ public class RoundSelectionPartBActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_round_selection_parte_a);
+        setContentView(R.layout.activity_round_selection_parte_b);
 
         teamUid = getIntent().getStringExtra("id");
         checkRound1 = database.getReference("Answers Round 1").child(teamUid).child("testDone");

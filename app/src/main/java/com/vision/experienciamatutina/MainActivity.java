@@ -18,6 +18,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Objects;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     FinalExamActivity finalExamActivity;
     QuestionModel questionModel;
 
-    String checkTestDone, wait;
+    String checkTestDone, wait, part;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -209,17 +211,17 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.hasChild(id)) {
-                                Toast.makeText(getApplicationContext(), "Bienvenidos", Toast.LENGTH_SHORT).show();
-                                String part = String.valueOf(snapshot.child("parte"));
+                                Toast.makeText(getApplicationContext(), "Bienvenido", Toast.LENGTH_SHORT).show();
+                                part = String.valueOf(snapshot.child(id).child("parte").getValue());
                                 Log.e("boo", part);
 
-                                if (part == "Parte A") {
+                                if (part.equals("Parte A")){
                                     // Start round selection activity for Part A.
                                     Intent intent = new Intent(getApplicationContext(), RoundSelectionPartAActivity.class);
                                     intent.putExtra("id", id);
                                     startActivity(intent);
 
-                                } else if (part == "Parte B"){
+                                } else if (part.equals("Parte B")){
                                     // Start round selection activity for Part B.
                                     Intent intent = new Intent(getApplicationContext(), RoundSelectionPartBActivity.class);
                                     intent.putExtra("id", id);
