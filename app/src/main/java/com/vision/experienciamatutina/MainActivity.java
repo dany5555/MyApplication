@@ -45,12 +45,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        firstRoundExamRef = database.getReference("Exam Round 1");
-        secondRoundExamRef = database.getReference("Exam Round 2");
-        thirdRoundExamRef = database.getReference("Exam Round 3");
-        finalRoundExamRef = database.getReference("Exam Final Round");
+        //firstRoundExamRef = database.getReference("Exam Round 1");
+        //secondRoundExamRef = database.getReference("Exam Round 2");
+        //thirdRoundExamRef = database.getReference("Exam Round 3");
+        //finalRoundExamRef = database.getReference("Exam Final Round");
 
-        finalExamRef = database.getReference("ExamFinal");
+        //finalExamRef = database.getReference("ExamFinal");
 
         pinEditText = findViewById(R.id.team_pin_edit_text);
         waitTextView = findViewById(R.id.wait_text_view);
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        firstRoundExamRef.addValueEventListener(new ValueEventListener() {
+        /**firstRoundExamRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ExamActivity.firstRoundQuestionList.clear();
@@ -180,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        });*/
 
         loginButton = findViewById(R.id.start_exam_button);
         adminButton = findViewById(R.id.admin_button);

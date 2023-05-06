@@ -29,13 +29,13 @@ public class QuestionModel {
         this.answer3 = answer3;
     }
 
-    public QuestionModel(String question, String answer, String answer1, String answer2, String answer3, String questionType) {
+    public QuestionModel(String question, String answer, String option1, String option2, String option3, String questionType) {
         this.question = question;
-        this.questionType = questionType;
         this.answer = answer;
-        this.answer1 = answer1;
-        this.answer2 = answer2;
-        this.answer3 = answer3;
+        this.option1 = option1;
+        this.option2 = option2;
+        this.option3 = option3;
+        this.questionType = questionType;
     }
 
     public String getQuestion() {
