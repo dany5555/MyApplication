@@ -37,6 +37,10 @@ public class ExamActivity extends AppCompatActivity {
     public static ArrayList<QuestionModel> thirdRoundQuestionList = new ArrayList<>();
     public static ArrayList<QuestionModel> finalRoundQuestionList = new ArrayList<>();
 
+    public static ArrayList<QuestionModel> exam1RAList = new ArrayList<>();
+    public static ArrayList<QuestionModel> exam1RBList = new ArrayList<>();
+
+
     public ArrayList<QuestionModel> currentQuestionList = new ArrayList<>();
 
 
@@ -48,6 +52,16 @@ public class ExamActivity extends AppCompatActivity {
     DatabaseReference secondRoundRef = database.getReference("Answers Round 2");
     DatabaseReference thirdRoundRef = database.getReference("Answers Round 3");
     DatabaseReference finalRoundRef = database.getReference("Answers Final Round");
+
+    DatabaseReference exam1RARef = database.getReference("Answers 1RA");
+    DatabaseReference exam2RARef = database.getReference("Answers 2RA");
+    DatabaseReference exam3RARef = database.getReference("Answers 3RA");
+    DatabaseReference examFRARef = database.getReference("Answers FRA");
+
+    DatabaseReference exam1RBRef = database.getReference("Answers 1RB");
+    DatabaseReference exam2RBRef = database.getReference("Answers 2RB");
+    DatabaseReference exam3RBRef = database.getReference("Answers 3RB");
+    DatabaseReference examFRBRef = database.getReference("Answers FRB");
 
     DatabaseReference teamNameRef = database.getReference("Team PINS");
 
@@ -101,11 +115,11 @@ public class ExamActivity extends AppCompatActivity {
         } else if (round.equals("thirdRound")) {
             currentQuestionList = thirdRoundQuestionList;
             currentRoundRef = thirdRoundRef;
-        } else {
-            currentQuestionList = finalRoundQuestionList;
-            currentRoundRef = finalRoundRef;
-        }
-        if (currentQuestionList.get(currentQuestion - 1).getQuestionType().equals("FB")) {
+        } else if (round.equals("1RA")){
+            currentQuestionList = exam1RAList;
+            currentRoundRef = exam1RARef;
+        } else if (round.equals("1RB")){
+            currentQuestionList = exam1RBList;
             countDownTimer = new CountDownTimer(120000, 1000) {
                 @Override
                 public void onTick(long l) {

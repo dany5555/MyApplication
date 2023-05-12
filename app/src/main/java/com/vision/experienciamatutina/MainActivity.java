@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
 
     DatabaseReference participantPinsRef = database.getReference("Participants");
     DatabaseReference secondRoundExamRef, thirdRoundExamRef, finalRoundExamRef;
+    DatabaseReference exam1RARef, exam2RARef, exam3RARef, examFRARef;
+    DatabaseReference exam1RBRef;
     //DatabaseReference checkRef;
     //DatabaseReference waitRef = database.getReference("Admin");
 
@@ -49,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
         //secondRoundExamRef = database.getReference("Exam Round 2");
         //thirdRoundExamRef = database.getReference("Exam Round 3");
         //finalRoundExamRef = database.getReference("Exam Final Round");
+        exam1RARef = database.getReference("Exam Round 1 Part A");
+        exam1RBRef = database.getReference("Exam Round 1 Part B");
 
         //finalExamRef = database.getReference("ExamFinal");
 
@@ -83,6 +87,42 @@ public class MainActivity extends AppCompatActivity {
         });*/
 
         Log.e("boo", "is test open? " + wait);
+
+        exam1RARef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ExamActivity.exam1RAList.clear();
+
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    questionModel = ds.getValue(QuestionModel.class);
+                    ExamActivity.exam1RAList.add(questionModel);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        exam1RBRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ExamActivity.exam1RBList.clear();
+
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    questionModel = ds.getValue(QuestionModel.class);
+                    ExamActivity.exam1RBList.add(questionModel);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
 
 

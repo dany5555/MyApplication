@@ -29,10 +29,10 @@ public class RoundSelectionPartBActivity extends AppCompatActivity {
         setContentView(R.layout.activity_round_selection_parte_b);
 
         teamUid = getIntent().getStringExtra("id");
-        checkRound1 = database.getReference("Answers Round 1").child(teamUid).child("testDone");
-        checkRound2 = database.getReference("Answers Round 2").child(teamUid).child("testDone");
-        checkRound3 = database.getReference("Answers Round 3").child(teamUid).child("testDone");
-        checkFinalRound = database.getReference("Answers Final Round").child(teamUid).child("testDone");
+        checkRound1 = database.getReference("Answers 1RB").child(teamUid).child("testDone");
+        checkRound2 = database.getReference("Answers 2RB").child(teamUid).child("testDone");
+        checkRound3 = database.getReference("Answers 3RB").child(teamUid).child("testDone");
+        checkFinalRound = database.getReference("Answers FRB").child(teamUid).child("testDone");
 
         checkRound1.addValueEventListener(new ValueEventListener() {
             @Override
@@ -95,7 +95,7 @@ public class RoundSelectionPartBActivity extends AppCompatActivity {
                 // Starts the ExamActivity
                 Intent intent = new Intent(getApplicationContext(), ExamActivity.class);
                 intent.putExtra("id", teamUid);
-                intent.putExtra("round", "firstRound");
+                intent.putExtra("round", "1RB");
 
                 startActivity(intent);
             } else {
@@ -111,7 +111,7 @@ public class RoundSelectionPartBActivity extends AppCompatActivity {
                 // Starts the ExamActivity
                 Intent intent = new Intent(getApplicationContext(), ExamActivity.class);
                 intent.putExtra("id", teamUid);
-                intent.putExtra("round", "secondRound");
+                intent.putExtra("round", "2RB");
 
                 startActivity(intent);
             } else {
@@ -127,7 +127,7 @@ public class RoundSelectionPartBActivity extends AppCompatActivity {
                 // Starts the ExamActivity
                 Intent intent = new Intent(getApplicationContext(), ExamActivity.class);
                 intent.putExtra("id", teamUid);
-                intent.putExtra("round", "thirdRound");
+                intent.putExtra("round", "3RB");
 
                 startActivity(intent);
             } else {
@@ -143,7 +143,7 @@ public class RoundSelectionPartBActivity extends AppCompatActivity {
                 // Starts the ExamActivity
                 Intent intent = new Intent(getApplicationContext(), FinalExamActivity.class);
                 intent.putExtra("id", teamUid);
-                intent.putExtra("round", "finalRound");
+                intent.putExtra("round", "FRB");
 
                 startActivity(intent);
             } else {
