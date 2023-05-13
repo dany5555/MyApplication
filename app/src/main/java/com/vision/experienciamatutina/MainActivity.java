@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference participantPinsRef = database.getReference("Participants");
     DatabaseReference secondRoundExamRef, thirdRoundExamRef, finalRoundExamRef;
     DatabaseReference exam1RARef, exam2RARef, exam3RARef, examFRARef;
-    DatabaseReference exam1RBRef;
+    DatabaseReference exam1RBRef, exam2RBRef, exam3RBRef, examFRBRef;
     //DatabaseReference checkRef;
     //DatabaseReference waitRef = database.getReference("Admin");
 
@@ -52,7 +52,14 @@ public class MainActivity extends AppCompatActivity {
         //thirdRoundExamRef = database.getReference("Exam Round 3");
         //finalRoundExamRef = database.getReference("Exam Final Round");
         exam1RARef = database.getReference("Exam Round 1 Part A");
+        exam2RARef = database.getReference("Exam Round 2 Part A");
+        exam3RARef = database.getReference("Exam Round 3 Part A");
+        examFRARef = database.getReference("Exam Final Round Part A");
+
         exam1RBRef = database.getReference("Exam Round 1 Part B");
+        exam2RBRef = database.getReference("Exam Round 2 Part B");
+        exam3RBRef = database.getReference("Exam Round 3 Part B");
+        examFRBRef = database.getReference("Exam Final Round Part B");
 
         //finalExamRef = database.getReference("ExamFinal");
 
@@ -106,6 +113,60 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        exam2RARef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ExamActivity.exam2RAList.clear();
+
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    questionModel = ds.getValue(QuestionModel.class);
+                    ExamActivity.exam2RAList.add(questionModel);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        exam3RARef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ExamActivity.exam3RAList.clear();
+
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    questionModel = ds.getValue(QuestionModel.class);
+                    ExamActivity.exam3RAList.add(questionModel);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        examFRARef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ExamActivity.examFRAList.clear();
+
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    questionModel = ds.getValue(QuestionModel.class);
+                    ExamActivity.examFRAList.add(questionModel);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         exam1RBRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -114,6 +175,60 @@ public class MainActivity extends AppCompatActivity {
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     questionModel = ds.getValue(QuestionModel.class);
                     ExamActivity.exam1RBList.add(questionModel);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        exam2RBRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ExamActivity.exam2RBList.clear();
+
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    questionModel = ds.getValue(QuestionModel.class);
+                    ExamActivity.exam2RBList.add(questionModel);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        exam3RBRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ExamActivity.exam3RBList.clear();
+
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    questionModel = ds.getValue(QuestionModel.class);
+                    ExamActivity.exam3RBList.add(questionModel);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        examFRBRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ExamActivity.examFRBList.clear();
+
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    questionModel = ds.getValue(QuestionModel.class);
+                    ExamActivity.examFRBList.add(questionModel);
                 }
 
             }
