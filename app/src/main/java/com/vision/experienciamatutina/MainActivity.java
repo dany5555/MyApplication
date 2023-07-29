@@ -18,8 +18,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.Objects;
-
 
 public class MainActivity extends AppCompatActivity {
 
@@ -152,11 +150,11 @@ public class MainActivity extends AppCompatActivity {
         examFRARef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ExamActivity.examFRAList.clear();
+                FinalExamActivity.examFRAList.clear();
 
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     questionModel = ds.getValue(QuestionModel.class);
-                    ExamActivity.examFRAList.add(questionModel);
+                    FinalExamActivity.examFRAList.add(questionModel);
                 }
 
             }
@@ -224,11 +222,11 @@ public class MainActivity extends AppCompatActivity {
         examFRBRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ExamActivity.examFRBList.clear();
+                FinalExamActivity.examFRBList.clear();
 
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     questionModel = ds.getValue(QuestionModel.class);
-                    ExamActivity.examFRBList.add(questionModel);
+                    FinalExamActivity.examFRBList.add(questionModel);
                 }
 
             }

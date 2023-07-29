@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,16 +27,22 @@ public class FinalExamActivity extends AppCompatActivity {
     TextView questionNumberTextView, timerTextView, questionLevelTextView, questionTextView, teamNameTextView, correctOrIncorrectTextView, endPoints;
     EditText answer1EditTextView, answer2EditTextView, answer3EditTextView;
     Button sendAnswerButton, nextQuestionButton, endExitButton;
-    String teamUid;
+    String teamUid, round;
     Dialog dialog, endDialog;
     ImageView correctOrIncorrectImageView;
     int currentQuestion = 1;
     CountDownTimer countDownTimer;
-    public static ArrayList<QuestionModel> finalQuestionsList = new ArrayList<>();
+    public static ArrayList<QuestionModel> examFRAList = new ArrayList<>();
+    public static ArrayList<QuestionModel> examFRBList = new ArrayList<>();
+    public static ArrayList<QuestionModel> examListHolder = new ArrayList<>();
+
+    long timeLeftInMilliseconds = 900000; // 15 minutes
+    boolean timerRunning;
+
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference teamRef = database.getReference("Answers Final Round");
-    DatabaseReference teamNameRef = database.getReference("Team PINS");
+    DatabaseReference teamNameRef = database.getReference("Participants");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +50,11 @@ public class FinalExamActivity extends AppCompatActivity {
         setContentView(R.layout.activity_final_exam);
 
         teamUid = getIntent().getStringExtra("id");
+        round = getIntent().getStringExtra("round");
 
         questionNumberTextView = findViewById(R.id.question_number_textView);
         timerTextView = findViewById(R.id.timer_textView);
-        questionLevelTextView = findViewById(R.id.question_level_textView);
+        questionLevelTextView = findViewById(R.id.timer_textView);
         questionTextView = findViewById(R.id.question_textView);
         teamNameTextView = findViewById(R.id.team_name_textView);
         answer1EditTextView = findViewById(R.id.answer1_editText);
@@ -54,7 +62,17 @@ public class FinalExamActivity extends AppCompatActivity {
         answer3EditTextView = findViewById(R.id.answer3_editText);
         sendAnswerButton = findViewById(R.id.send_answer_button);
 
-        teamNameRef.child(teamUid).child("team").addValueEventListener(new ValueEventListener() {
+        if (round.equals("FRA")) {
+            teamRef = database.getReference("Answers FRA");
+            examListHolder = examFRAList;
+        } else {
+            teamRef = database.getReference("Answers FRB");
+            examListHolder = examFRBList;
+        }
+
+        startStopTimer();
+
+        teamNameRef.child(teamUid).child("name").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String teamName = snapshot.getValue(String.class);
@@ -67,7 +85,7 @@ public class FinalExamActivity extends AppCompatActivity {
             }
         });
 
-        if (finalQuestionsList.get(currentQuestion - 1).getQuestionType().equals("Nivel 1")) {
+        /**if (examListHolder.get(currentQuestion - 1).getQuestionType().equals("Nivel 1")) {
             countDownTimer = new CountDownTimer(60000, 1000) {
                 @Override
                 public void onTick(long l) {
@@ -84,7 +102,7 @@ public class FinalExamActivity extends AppCompatActivity {
                     currentQuestion++;
                 }
             }.start();
-        } else if (finalQuestionsList.get(currentQuestion - 1).getQuestionType().equals("Nivel 2")){
+        } else if (examListHolder.get(currentQuestion - 1).getQuestionType().equals("Nivel 2")){
             countDownTimer = new CountDownTimer(120000, 1000) {
                 @Override
                 public void onTick(long l) {
@@ -118,7 +136,7 @@ public class FinalExamActivity extends AppCompatActivity {
                     currentQuestion++;
                 }
             }.start();
-        }
+        }*/
 
         setDataToViews(currentQuestion);
 
@@ -145,11 +163,11 @@ public class FinalExamActivity extends AppCompatActivity {
         endExitButton = endDialog.findViewById(R.id.exit_button);
         endPoints = endDialog.findViewById(R.id.final_points_textView);
 
-        if (finalQuestionsList.get(currentQuestion - 1).getQuestionType().equals("Nivel 1")) {
+        if (examListHolder.get(currentQuestion - 1).getQuestionType().equals("Nivel 1")) {
             answer1EditTextView.setVisibility(View.VISIBLE);
             answer2EditTextView.setVisibility(View.GONE);
             answer3EditTextView.setVisibility(View.GONE);
-        } else if (finalQuestionsList.get(currentQuestion - 1).getQuestionType().equals("Nivel 2")) {
+        } else if (examListHolder.get(currentQuestion - 1).getQuestionType().equals("Nivel 2")) {
             answer1EditTextView.setVisibility(View.VISIBLE);
             answer2EditTextView.setVisibility(View.VISIBLE);
             answer3EditTextView.setVisibility(View.GONE);
@@ -167,14 +185,14 @@ public class FinalExamActivity extends AppCompatActivity {
         });
 
         nextQuestionButton.setOnClickListener(view -> {
-            if (currentQuestion <= finalQuestionsList.size()) {
+            if (currentQuestion <= examListHolder.size()) {
                 setDataToViews(currentQuestion);
 
-                if (finalQuestionsList.get(currentQuestion - 1).getQuestionType().equals("Nivel 1")) {
+                if (examListHolder.get(currentQuestion - 1).getQuestionType().equals("Nivel 1")) {
                     answer1EditTextView.setVisibility(View.VISIBLE);
                     answer2EditTextView.setVisibility(View.GONE);
                     answer3EditTextView.setVisibility(View.GONE);
-                } else if (finalQuestionsList.get(currentQuestion - 1).getQuestionType().equals("Nivel 2")) {
+                } else if (examListHolder.get(currentQuestion - 1).getQuestionType().equals("Nivel 2")) {
                     answer1EditTextView.setVisibility(View.VISIBLE);
                     answer2EditTextView.setVisibility(View.VISIBLE);
                     answer3EditTextView.setVisibility(View.GONE);
@@ -187,7 +205,7 @@ public class FinalExamActivity extends AppCompatActivity {
 
                 //timer.setText("60");
 
-                if (finalQuestionsList.get(currentQuestion - 1).getQuestionType().equals("Nivel 1")) {
+                /**if (examListHolder.get(currentQuestion - 1).getQuestionType().equals("Nivel 1")) {
                     countDownTimer = new CountDownTimer(60000, 1000) {
                         @Override
                         public void onTick(long l) {
@@ -205,7 +223,7 @@ public class FinalExamActivity extends AppCompatActivity {
 
                         }
                     }.start();
-                } else if (finalQuestionsList.get(currentQuestion - 1).getQuestionType().equals("Nivel 2")){
+                } else if (examListHolder.get(currentQuestion - 1).getQuestionType().equals("Nivel 2")){
                     countDownTimer = new CountDownTimer(120000, 1000) {
                         @Override
                         public void onTick(long l) {
@@ -239,7 +257,9 @@ public class FinalExamActivity extends AppCompatActivity {
                             currentQuestion++;
                         }
                     }.start();
-                }
+                }*/
+
+                startStopTimer();
 
                 dialog.dismiss();
 
@@ -258,11 +278,11 @@ public class FinalExamActivity extends AppCompatActivity {
             String answer3 = answer3EditTextView.getText().toString();
             int timeElapsed;
 
-            if (finalQuestionsList.get(currentQuestion - 1).getQuestionType().equals("Nivel 1")) {
+            /**if (examListHolder.get(currentQuestion - 1).getQuestionType().equals("Nivel 1")) {
                 timeElapsed = 60 - Integer.valueOf(timerTextView.getText().toString());
                 //teamRef.child(teamUid).child("respuesta " + "0" + currentQuestion).child("tiempo transcurrido").setValue(String.valueOf(timeElapsed));
                 //Log.e("lol", "time elapsed: " + timeElapsed);
-            } else if (finalQuestionsList.get(currentQuestion - 1).getQuestionType().equals("Nivel 2")) {
+            } else if (examListHolder.get(currentQuestion - 1).getQuestionType().equals("Nivel 2")) {
                 timeElapsed = 120 - Integer.valueOf(timerTextView.getText().toString());
                 //teamRef.child(teamUid).child("respuesta " + "0" + currentQuestion).child("tiempo transcurrido").setValue(String.valueOf(timeElapsed));
                 //Log.e("lol", "time elapsed: " + timeElapsed);
@@ -270,19 +290,19 @@ public class FinalExamActivity extends AppCompatActivity {
                 timeElapsed = 180 - Integer.valueOf(timerTextView.getText().toString());
                 //teamRef.child(teamUid).child("respuesta " + "0" + currentQuestion).child("tiempo transcurrido").setValue(String.valueOf(timeElapsed));
                 //Log.e("lol", "time elapsed: " + timeElapsed);
-            }
+            }*/
 
             if (currentQuestion < 10) {
                 teamRef.child(teamUid).child("respuesta " + "0" + currentQuestion).child("parte 1").setValue(answer1);
                 teamRef.child(teamUid).child("respuesta " + "0" + currentQuestion).child("parte 2").setValue(answer2);
                 teamRef.child(teamUid).child("respuesta " + "0" + currentQuestion).child("parte 3").setValue(answer3);
-                teamRef.child(teamUid).child("respuesta " + "0" + currentQuestion).child("tiempo transcurrido").setValue(String.valueOf(timeElapsed));
+                //teamRef.child(teamUid).child("respuesta " + "0" + currentQuestion).child("tiempo transcurrido").setValue(String.valueOf(timeElapsed));
 
             } else {
                 teamRef.child(teamUid).child("respuesta " + currentQuestion).child("parte 1").setValue(answer1);
                 teamRef.child(teamUid).child("respuesta " + currentQuestion).child("parte 2").setValue(answer2);
                 teamRef.child(teamUid).child("respuesta " + currentQuestion).child("parte 3").setValue(answer3);
-                teamRef.child(teamUid).child("respuesta " + currentQuestion).child("tiempo transcurrido").setValue(String.valueOf(timeElapsed));
+                //teamRef.child(teamUid).child("respuesta " + currentQuestion).child("tiempo transcurrido").setValue(String.valueOf(timeElapsed));
             }
 
             correctOrIncorrectTextView.setText("Tu respuesta será calificada más tarde");
@@ -290,19 +310,19 @@ public class FinalExamActivity extends AppCompatActivity {
             dialog.show();
             currentQuestion++;
 
-            countDownTimer.cancel();
+            stopTimer();
         });
 
 
     }
 
     public void setDataToViews(int currentQuestion) {
-        questionTextView.setText(finalQuestionsList.get(currentQuestion - 1).getQuestion());
-        questionLevelTextView.setText(finalQuestionsList.get(currentQuestion - 1).getQuestionType());
+        questionTextView.setText(examListHolder.get(currentQuestion - 1).getQuestion());
+        questionLevelTextView.setText(examListHolder.get(currentQuestion - 1).getQuestionType());
         answer1EditTextView.setText("");
         answer2EditTextView.setText("");
         answer3EditTextView.setText("");
-        questionNumberTextView.setText(currentQuestion + " de " + finalQuestionsList.size());
+        questionNumberTextView.setText(currentQuestion + " / " + examListHolder.size());
     }
 
     public void endTmeSaveData(int currentQuestion) {
@@ -310,11 +330,11 @@ public class FinalExamActivity extends AppCompatActivity {
         String answer2 = answer2EditTextView.getText().toString();
         String answer3 = answer3EditTextView.getText().toString();
 
-        if (finalQuestionsList.get(currentQuestion - 1).getQuestionType().equals("Nivel 1")) {
+        if (examListHolder.get(currentQuestion - 1).getQuestionType().equals("Nivel 1")) {
             int timeElapsed = 60;
             teamRef.child(teamUid).child("respuesta " + "0" + currentQuestion).child("tiempo transcurrido").setValue(String.valueOf(timeElapsed));
             //Log.e("lol", "time elapsed: " + timeElapsed);
-        } else if (finalQuestionsList.get(currentQuestion - 1).getQuestionType().equals("Nivel 2")) {
+        } else if (examListHolder.get(currentQuestion - 1).getQuestionType().equals("Nivel 2")) {
             int timeElapsed = 120;
             teamRef.child(teamUid).child("respuesta " + "0" + currentQuestion).child("tiempo transcurrido").setValue(String.valueOf(timeElapsed));
             //Log.e("lol", "time elapsed: " + timeElapsed);
@@ -337,5 +357,66 @@ public class FinalExamActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+    }
+
+    public void startTimer () {
+        countDownTimer = new CountDownTimer(timeLeftInMilliseconds, 1000) {
+            @Override
+            public void onTick(long l) {
+                timeLeftInMilliseconds = l;
+                updateTimer();
+
+                if (timerTextView.getText().equals("0:00")) {
+                    Toast.makeText(getApplicationContext(), "sdfsdfds", Toast.LENGTH_SHORT).show();
+                    endDialog = new Dialog(FinalExamActivity.this);
+                    endDialog.setContentView(R.layout.end_exam_dialog);
+                    endDialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.dialog_background));
+                    endDialog.setCancelable(false);
+                    endDialog.setCanceledOnTouchOutside(false);
+                    endDialog.show();
+                }
+
+                endExitButton.setOnClickListener(view -> {
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                    //onBackPressed();
+                    endDialog.dismiss();
+                });
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        }.start();
+
+        timerRunning = true;
+    }
+
+    public void stopTimer () {
+        countDownTimer.cancel();
+        timerRunning = false;
+    }
+
+    public void updateTimer () {
+        int minutes = (int) timeLeftInMilliseconds / 60000;
+        int seconds = (int) timeLeftInMilliseconds % 60000 / 1000;
+
+        String timeLeftText;
+        timeLeftText = "" + minutes;
+        timeLeftText += ":";
+        if (seconds < 10) timeLeftText += "0";
+        timeLeftText += seconds;
+
+        timerTextView.setText(timeLeftText);
+    }
+
+    public void startStopTimer () {
+        if (timerRunning) {
+            stopTimer();
+        } else {
+            startTimer();
+        }
     }
 }
