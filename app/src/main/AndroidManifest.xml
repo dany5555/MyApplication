@@ -8,7 +8,7 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/ic_experiencia_matutina_logo"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/ic_experiencia_matutina_logo"
+        android:roundIcon="@drawable/em_new_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.ExperienciaMatutina"
         tools:targetApi="31">
