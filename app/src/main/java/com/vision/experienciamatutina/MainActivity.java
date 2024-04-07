@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
 
     DatabaseReference participantPinsRef = database.getReference("Participants");
-    DatabaseReference secondRoundExamRef, thirdRoundExamRef, finalRoundExamRef;
+    DatabaseReference firstRoundExamRef, secondRoundExamRef, thirdRoundExamRef, finalRoundExamRef;
     DatabaseReference exam1RARef, exam2RARef, exam3RARef, examFRARef;
     DatabaseReference exam1RBRef, exam2RBRef, exam3RBRef, examFRBRef;
     //DatabaseReference checkRef;
@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
     EditText pinEditText;
     TextView waitTextView, instructionsTextView;
 
-    DatabaseReference firstRoundExamRef, finalExamRef;
     FinalExamActivity finalExamActivity;
     QuestionModel questionModel;
 
@@ -45,10 +44,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //firstRoundExamRef = database.getReference("Exam Round 1");
-        //secondRoundExamRef = database.getReference("Exam Round 2");
-        //thirdRoundExamRef = database.getReference("Exam Round 3");
-        //finalRoundExamRef = database.getReference("Exam Final Round");
+        firstRoundExamRef = database.getReference("Exam Round 1");
+        secondRoundExamRef = database.getReference("Exam Round 2");
+        thirdRoundExamRef = database.getReference("Exam Round 3");
+        finalRoundExamRef = database.getReference("Exam Final Round");
+
         exam1RARef = database.getReference("Exam Round 1 Part A");
         exam2RARef = database.getReference("Exam Round 2 Part A");
         exam3RARef = database.getReference("Exam Round 3 Part A");
@@ -239,7 +239,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        /**firstRoundExamRef.addValueEventListener(new ValueEventListener() {
+        firstRoundExamRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ExamActivity.firstRoundQuestionList.clear();
@@ -314,18 +314,18 @@ public class MainActivity extends AppCompatActivity {
         finalRoundExamRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                FinalExamActivity.finalQuestionsList.clear();
+                FinalExamActivity.finalRoundQuestionList.clear();
 
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     questionModel = ds.getValue(QuestionModel.class);
-                    FinalExamActivity.finalQuestionsList.add(questionModel);
+                    FinalExamActivity.finalRoundQuestionList.add(questionModel);
                 }
 
                 //QuestionModel questionModel = snapshot.child("Pregunta 1").getValue(QuestionModel.class);
                 //finalQuestionsList.add(questionModel);
                 //question = snapshot.child("Pregunta 1").getValue(String.class);
 
-                Log.e("cat", FinalExamActivity.finalQuestionsList.get(0).question);
+                Log.e("cat", FinalExamActivity.finalRoundQuestionList.get(0).question);
 
             }
 
@@ -333,7 +333,7 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });*/
+        });
 
         loginButton = findViewById(R.id.start_exam_button);
         adminButton = findViewById(R.id.admin_button);
@@ -377,6 +377,10 @@ public class MainActivity extends AppCompatActivity {
                                 } else if (part.equals("Parte B")){
                                     // Start round selection activity for Part B.
                                     Intent intent = new Intent(getApplicationContext(), RoundSelectionPartBActivity.class);
+                                    intent.putExtra("id", id);
+                                    startActivity(intent);
+                                } else if (part.equals("Completo")) {
+                                    Intent intent = new Intent(getApplicationContext(), RoundSelectionCompleteActivity.class);
                                     intent.putExtra("id", id);
                                     startActivity(intent);
                                 }

@@ -33,7 +33,7 @@ public class ExamActivity extends AppCompatActivity {
     ImageView correctOrIncorrectImageView;
     int currentScore = 0, currentQuestion = 1;
     CountDownTimer countDownTimer;
-    long timeLeftInMilliseconds = 720000; // 12 minutes
+    long timeLeftInMilliseconds = 1800000; // 30 minutes
     boolean timerRunning;
 
     public static ArrayList<QuestionModel> firstRoundQuestionList = new ArrayList<>();
@@ -117,15 +117,18 @@ public class ExamActivity extends AppCompatActivity {
         Log.e("lol", "");
         //Collections.shuffle(finalQuestionsList);
 
-        if (round.equals("firstRound")) {
+        if (round.equals("1R")) {
             currentQuestionList = firstRoundQuestionList;
             currentRoundRef = firstRoundRef;
-        } else if (round.equals("secondRound")) {
+        } else if (round.equals("2R")) {
             currentQuestionList = secondRoundQuestionList;
             currentRoundRef = secondRoundRef;
-        } else if (round.equals("thirdRound")) {
+        } else if (round.equals("3R")) {
             currentQuestionList = thirdRoundQuestionList;
             currentRoundRef = thirdRoundRef;
+        } else if (round.equals("FR")){
+            currentQuestionList = finalRoundQuestionList;
+            currentRoundRef = finalRoundRef;
         } else if (round.equals("1RA")){
             currentQuestionList = exam1RAList;
             currentRoundRef = exam1RARef;

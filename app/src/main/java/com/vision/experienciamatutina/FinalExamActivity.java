@@ -32,11 +32,12 @@ public class FinalExamActivity extends AppCompatActivity {
     ImageView correctOrIncorrectImageView;
     int currentQuestion = 1;
     CountDownTimer countDownTimer;
+    public static ArrayList<QuestionModel> finalRoundQuestionList = new ArrayList<>();
     public static ArrayList<QuestionModel> examFRAList = new ArrayList<>();
     public static ArrayList<QuestionModel> examFRBList = new ArrayList<>();
     public static ArrayList<QuestionModel> examListHolder = new ArrayList<>();
 
-    long timeLeftInMilliseconds = 900000; // 15 minutes
+    long timeLeftInMilliseconds = 1800000; // 30 minutes
     boolean timerRunning;
 
 
@@ -65,9 +66,12 @@ public class FinalExamActivity extends AppCompatActivity {
         if (round.equals("FRA")) {
             teamRef = database.getReference("Answers FRA");
             examListHolder = examFRAList;
-        } else {
+        } else if (round.equals("FRB")) {
             teamRef = database.getReference("Answers FRB");
             examListHolder = examFRBList;
+        } else {
+            teamRef = database.getReference("Answers Final Round");
+            examListHolder = finalRoundQuestionList;
         }
 
         startStopTimer();

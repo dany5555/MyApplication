@@ -935,484 +935,480 @@ public class AdminActivity extends AppCompatActivity {
 
 
     public ArrayList<String> getDates1RList() {
-        datesList.add("1 de Abril");
-        datesList.add("2 de Abril");
-        datesList.add("3 de Abril");
-        datesList.add("4 de Abril");
-        datesList.add("5 de Abril");
-        datesList.add("6 de Abril");
-        datesList.add("7 de Abril");
+        datesList.add("1 de Febrero");
+        datesList.add("2 de Febrero");
+        datesList.add("3 de Febrero");
+        datesList.add("4 de Febrero");
+        datesList.add("5 de Febrero");
+        datesList.add("6 de Febrero");
+        datesList.add("7 de Febrero");
 
         return datesList;
     }
 
     public ArrayList<String> getDates2RList() {
-        datesList.add("8 de Abril");
-        datesList.add("9 de Abril");
-        datesList.add("10 de Abril");
-        datesList.add("11 de Abril");
-        datesList.add("12 de Abril");
-        datesList.add("13 de Abril");
-        datesList.add("14 de Abril");
+        datesList.add("8 de Febrero");
+        datesList.add("9 de Febrero");
+        datesList.add("10 de Febrero");
+        datesList.add("11 de Febrero");
+        datesList.add("12 de Febrero");
+        datesList.add("13 de Febrero");
+        datesList.add("14 de Febrero");
 
         return datesList;
     }
 
     public ArrayList<String> getDates3RList() {
-        datesList.add("15 de Abril");
-        datesList.add("16 de Abril");
-        datesList.add("17 de Abril");
-        datesList.add("18 de Abril");
-        datesList.add("19 de Abril");
-        datesList.add("20 de Abril");
-        datesList.add("21 de Abril");
-        datesList.add("22 de Abril");
+        datesList.add("15 de Febrero");
+        datesList.add("16 de Febrero");
+        datesList.add("17 de Febrero");
+        datesList.add("18 de Febrero");
+        datesList.add("19 de Febrero");
+        datesList.add("20 de Febrero");
+        datesList.add("21 de Febrero");
 
         return datesList;
     }
 
     public ArrayList<String> getDatesFRList() {
-        datesList.add("23 de Abril");
-        datesList.add("24 de Abril");
-        datesList.add("25 de Abril");
-        datesList.add("26 de Abril");
-        datesList.add("27 de Abril");
-        datesList.add("28 de Abril");
-        datesList.add("29 de Abril");
-        datesList.add("30 de Abril");
+        datesList.add("22 de Febrero");
+        datesList.add("23 de Febrero");
+        datesList.add("24 de Febrero");
+        datesList.add("25 de Febrero");
+        datesList.add("26 de Febrero");
+        datesList.add("27 de Febrero");
+        datesList.add("28 de Febrero");
+        datesList.add("29 de Febrero");
 
         return datesList;
     }
 
     public ArrayList<String> getTitles1RList() {
-        titlesList.add("\"Mucho más sabios\"");
-        titlesList.add("\"La belleza de las formas\"");
-        titlesList.add("\"¡Menudo cálculo!\"");
-        titlesList.add("\"No siempre le entiendo pero siempre me ama\"");
-        titlesList.add("\"Una mirada justa, juicios justos\"");
-        titlesList.add("\"Indicadores\"");
-        titlesList.add("\"Y fue así\"");
+        titlesList.add("\"La red de baloncesto\"");
+        titlesList.add("\"El freno de emergencia\"");
+        titlesList.add("\"El cabezal de la ducha\"");
+        titlesList.add("\"La máquina de rayos X\"");
+        titlesList.add("\"Un broche de plástico\"");
+        titlesList.add("\"Un neumático\"");
+        titlesList.add("\"Un molde para panecitos\"");
 
         return titlesList;
     }
 
     public ArrayList<String> getTitles2RList() {
-        titlesList.add("\"Menos lobos, Caperucita\"");
-        titlesList.add("\"'Time lapse'\"");
-        titlesList.add("\"Cataratas\"");
-        titlesList.add("\"Ingeniería inversa\"");
-        titlesList.add("\"'Big Big Data'\"");
-        titlesList.add("\"Serendipia\"");
-        titlesList.add("\"Ni la Academia ni el Liceo\"");
+        titlesList.add("\"Un imán sobre el refrigerador\"");
+        titlesList.add("\"Los frenillos de ortodoncia\"");
+        titlesList.add("\"El casco de motocicleta\"");
+        titlesList.add("\"Una billetera de cintas multiusos\"");
+        titlesList.add("\"Un boleto rasca y gana\"");
+        titlesList.add("\"Las pantuflas\"");
+        titlesList.add("\"Un grano de cacao\"");
 
         return titlesList;
     }
 
     public ArrayList<String> getTitles3RList() {
-        titlesList.add("\"La fruta nuestra de cada día\"");
-        titlesList.add("\"'Slow food'\"");
-        titlesList.add("\"Preciosura\"");
-        titlesList.add("\"La taxonomía de Cristo\"");
-        titlesList.add("\"Las primeras cosas\"");
-        titlesList.add("\"Gracia con una pizca de sal\"");
-        titlesList.add("\"A examen\"");
-        titlesList.add("\"El mejor orador\"");
+        titlesList.add("\"La pizarra blanca de borrado en seco\"");
+        titlesList.add("\"El lente de una cámara fotográfica\"");
+        titlesList.add("\"El tope de puerta\"");
+        titlesList.add("\"Una piedra de recuerdo\"");
+        titlesList.add("\"Un colgador de ropa\"");
+        titlesList.add("\"El mostrador del baño\"");
+        titlesList.add("\"Los bigotes del gato\"");
 
         return titlesList;
     }
 
     public ArrayList<String> getTitlesFRList() {
-        titlesList.add("\"Las palabras caducas y las palabras perennes\"");
-        titlesList.add("\"Reconoce y confía\"");
-        titlesList.add("\"Asertividad y más asertividad\"");
-        titlesList.add("\"Zombis\"");
-        titlesList.add("\"Voz de los silenciados\"");
-        titlesList.add("\"Los tres filtros\"");
-        titlesList.add("\"Una palabra cariñosa\"");
-        titlesList.add("\"Cómo ser amable y no morir en el intento\"");
+        titlesList.add("\"La bandera negra de consulta\"");
+        titlesList.add("\"Un casco de fútbol norteamericano\"");
+        titlesList.add("\"El calendario\"");
+        titlesList.add("\"Una horquilla invisible\"");
+        titlesList.add("\"Un destornillador Phillips\"");
+        titlesList.add("\"Una máquina de escribir\"");
+        titlesList.add("\"Un par de calcetines\"");
+        titlesList.add("\"Un plato para el agua del perro\"");
 
         return titlesList;
     }
 
     public ArrayList<String> getVerseContents1RList() {
-        verseContentsList.add("«¿Quién es sabio para que sepa esto, y prudente para que lo comprenda? Porque los caminos de Jehová son rectos, por ellos andarán los justos, mas los rebeldes caerán en ellos»");
-        verseContentsList.add("«Todo lo hizo hermoso en su tiempo, y ha puesto eternidad en el corazón del hombre, sin que este alcance a comprender la obra hecha por Dios desde el principio hasta el fin»");
-        verseContentsList.add("«Él cuenta el número de las estrellas; a todas ellas llama por sus nombres. Grande es el Señor nuestro y mucho su poder, y su entendimiento es infinito»");
-        verseContentsList.add("«\"Porque mis pensamientos no son vuestros pensamientos ni vuestros caminos mis caminos\", dice Jehová»");
-        verseContentsList.add("«¡Profundidad de las riquezas, de la sabiduría y del conocimiento de Dios! ¡Cuán insondables son sus juicios e inescrutables sus caminos!»");
-        verseContentsList.add("«Pero la sabiduría que es de lo alto es primeramente pura, después pacífica, amable, benigna, llena de misericordia y de buenos frutos, sin incertidumbre ni hipocresía»");
-        verseContentsList.add("«E hizo Dios un firmamento que separó las aguas que estaban debajo del firmamento, de las aguas que estaban sobre el firmamento. Y fue así»");
+        verseContentsList.add("«Por sus frutos los conoceréis. ¿Acaso se recogen uvas de los espinos, o higos de los abrojos?»");
+        verseContentsList.add("«Porque no nos ha dado Dios espíritu de cobardía, sino de poder; de amor y de dominio propio»");
+        verseContentsList.add("«Pues todos sois hijos de Dios por la fe en Cristo Jesús»");
+        verseContentsList.add("«¿A quién se enseñará ciencia, o a quién se hará entender doctrina? ¿A los destetados?, ¿a los arrancados de los pechos? Porque mandamiento tras mandamiento, mandato sobre mandato, renglón tras renglón, línea sobre línea, un poquito allí, otro poquito allá»");
+        verseContentsList.add("«Por lo tanto, desháganse de toda mala conducta. Acaben con todo engaño, hipocresía, celos y toda clase de comentarios hirientes»");
+        verseContentsList.add("«Y de igual manera el Espíritu nos ayuda en nuestra debilidad; pues qué hemos de pedir como conviene, no lo sabemos, pero el Espíritu mismo intercede por nosotros con gemidos indecibles»");
+        verseContentsList.add("«Por tanto, id, y haced discípulos a todas las naciones, bautizándolos en el nombre del Padre, y del Hijo, y del Espíritu Santo»");
 
         return verseContentsList;
     }
 
     public ArrayList<String> getVerseContents2RList() {
-        verseContentsList.add("«Estos son los orígenes de los cielos y de la tierra cuando fueron creados»");
-        verseContentsList.add("«Él es quien cambia los tiempos y las edades; quita reyes y pone reyes; da sabiduría a los sabios, y conocimiento a los entendidos»");
-        verseContentsList.add("«Ahora vemos por espejo, oscuramente; pero entonces veremos cara a cara. Ahora conozco en parte, pero entonces conoceré como fui conocido»");
-        verseContentsList.add("«Debemos siempre dar gracias a Dios por vosotros, hermanos, como es digno, por cuanto vuestra fe va creciendo y el amor de todos y cada uno de vosotros abunda para con los demás»");
-        verseContentsList.add("«Para que el Dios de nuestro Señor Jesucristo, el Padre de gloria, os dé espíritu de sabiduría y de revelación en el conocimiento de él»");
-        verseContentsList.add("«Si alguno de vosotros tiene falta de sabiduría, pídala a Dios, el cual da a todos abundantemente y sin reproche, y le será dada»");
-        verseContentsList.add("«¡Alaben la misericordia de Jehová y sus maravillas para con los hijos de los hombres!, porque sacia el alma menesterosa, y llena de bien al alma hambrienta»");
+        verseContentsList.add("«Hay amigos que llevan a la ruina, y hay amigos más fieles que un hermano»");
+        verseContentsList.add("«Instruye al niño en su camino, y aun cuando fuere viejo no se apartará de él»");
+        verseContentsList.add("«Nosotros que somos del día, por el contrario, estemos siempre en nuestro sano juicio, protegidos por la coraza de la fe y del amor; y por el casco de la esperanza de salvación»");
+        verseContentsList.add("«Porque estos son falsos apóstoles, obreros fraudulentos, que se disfrazan como apóstoles de Cristo. Y no es maravilla, porque el mismo Satanás se disfraza como ángel de luz»");
+        verseContentsList.add("«Pero el día y la hora nadie sabe, ni aún los ángeles de los cielos, sino sólo mi Padre»");
+        verseContentsList.add("«Y dijo: No te acerques; quita tu calzado de tus pies, porque el lugar en que tú estás, tierra santa es»");
+        verseContentsList.add("«Si yo hablase lenguas humanas y angélicas, y no tengo amor, vengo a ser como metal que resuena, o címbalo que retiñe»");
 
         return verseContentsList;
     }
 
     public ArrayList<String> getVerseContents3RList() {
-        verseContentsList.add("«Y mandó Jehová Dios al hombre, diciendo: \"De todo árbol del huerto podrás comer…\".»");
-        verseContentsList.add("«Entonces Jacob dio a Esaú pan y del guisado de las lentejas; él comió y bebió, se levantó y se fue...»");
-        verseContentsList.add("«Porque ¡cuánta es su bondad y cuánta su hermosura!...»");
-        verseContentsList.add("«Aunque andamos en la carne, no militamos según la carne»");
-        verseContentsList.add("«A los hijos de sus concubinas les dio Abraham regalos...»");
-        verseContentsList.add("«Sea vuestra palabra siempre con gracia, sazonada con sal, para que sepáis cómo debéis responder a cada uno»");
-        verseContentsList.add("«Examinadlo todo y retened lo bueno»");
-        verseContentsList.add("«Los alguaciles respondieron: ¡Jamás hombre alguno ha hablado como este hombre habla!»");
+        verseContentsList.add("«Jesús le dijo: Porque me has visto, Tomás, creíste; bienaventurados los que no vieron, y creyeron»");
+        verseContentsList.add("«Mas buscad primeramente el reino de Dios y su justicia, y todas estas cosas os serán añadidas»");
+        verseContentsList.add("«Venid a mí todos los que estáis trabajados y cargados, y yo os haré descansar»");
+        verseContentsList.add("«Entonces los que temían a Jehová hablaron cada uno a su compañero; y Jehová escuchó y oyó, y fue escrito libro de memoria delante de él para los que temen a Jehová, y para los que piensan en su nombre»");
+        verseContentsList.add("«Jesús le dijo: Yo soy el camino, y la verdad, y la vida; nadie viene al padre, sino por mí»");
+        verseContentsList.add("«El que habita al abrigo del Altísimo morará bajo la sombra del Omnipotente. Diré yo a Jehová: Esperanza mía, y castillo mío; mi Dios, en quien confiaré. Él te librará del lazo del cazador; de la peste destructora»");
+        verseContentsList.add("«Él respondió: \"Ustedes conocen el dicho: 'Si el cielo está rojo por la noche, mañana habrá buen clima; si el cielo está rojo por la mañana, habrá mal clima todo el día'. Saben interpretar las señales del clima en los cielos, pero no saben interpretar las señales de los tiempos\"»");
 
         return verseContentsList;
     }
 
     public ArrayList<String> getVerseContentsFRList() {
-        verseContentsList.add("«El labio veraz permanece para siempre; la lengua mentirosa, solo por un momento»");
-        verseContentsList.add("«El hombre le respondió: -La mujer que me diste por compañera me dio del árbol, y yo comí»");
-        verseContentsList.add("«El hombre se alegra con la respuesta de su boca; la palabra a su tiempo, ¡cuán buena es!»");
-        verseContentsList.add("«La muerte y la vida están en poder de la lengua; el que la ama, comerá de sus frutos»");
-        verseContentsList.add("«Abre tu boca en favor del mudo en el juicio de todos los desvalidos»");
-        verseContentsList.add("«Pero yo os digo que toda palabra ociosa que hablen de los hombres, de ella darán cuenta en el día del juicio»");
-        verseContentsList.add("«Entonces dijo Dios: \"Hagamos al hombre a nuestra imagen, conforme a nuestra semejanza; y tenga potestad sobre los peces del mar, las aves de los cielos y las bestias, sobre toda la tierra y sobre todo animal que se arrastra sobre la tierra\".»");
-        verseContentsList.add("«No devolváis mal por mal, ni maldición por maldición, sino por el contrario, bendiciendo...»");
+        verseContentsList.add("«Os rogamos, hermanos, que reconozcáis a los que trabajan entre vosotros, y os presiden en el Señor; y os amonestan; y que los tengáis en mucha estima y amor por causa de su obra. Tened paz entre vosotros»");
+        verseContentsList.add("«No toquéis, dijo, a mis ungidos, ni hagáis mal a mis profetas»");
+        verseContentsList.add("«Procura con diligencia presentarte a Dios aprobado, como obrero que no tiene de qué avergonzarse, que usa bien la palabra de verdad»");
+        verseContentsList.add("«...Gozaos conmigo, porque he encontrado mi oveja que se había perdido»");
+        verseContentsList.add("«¿Qué hombre de vosotros, teniendo cien ovejas, si pierde una de ellas, no deja las noventa y nueve en el desierto, y va tras la que se perdió, hasta encontrarla?»");
+        verseContentsList.add("«Todo lo hizo hermoso en su tiempo...»");
+        verseContentsList.add("«Levantándose muy de mañana, siendo aún muy oscuro, salió y se fue a un lugar desierto, y allí oraba»");
+        verseContentsList.add("«Y fue el número de los que lamieron llevando el agua con la mano a su boca, trescientos hombres; y todo el resto del pueblo se dobló sobre sus rodillas para beber las aguas»");
 
         return verseContentsList;
     }
 
     public ArrayList<String> getVerses1RList() {
-        versesList.add("\"Oseas 14:9\"");
-        versesList.add("\"Eclesiastés 3:11");
-        versesList.add("\"Salmos 147:4-5\"");
-        versesList.add("\"Isaías 55:8\"");
-        versesList.add("\"Romanos 11:33\"");
-        versesList.add("\"Santiago 3:17\"");
-        versesList.add("\"Génesis 1:7\"");
+        versesList.add("\"Mateo 7:16\"");
+        versesList.add("\"2 Timoteo 1:7\"");
+        versesList.add("\"Gálatas 3:26\"");
+        versesList.add("\"Isaías 28:9, 10\"");
+        versesList.add("\"1 Pedro 2:1, NTV\"");
+        versesList.add("\"Romanos 8:26\"");
+        versesList.add("\"Mateo 28:19\"");
 
         return versesList;
     }
 
     public ArrayList<String> getVerses2RList() {
-        versesList.add("\"Génesis 2:4\"");
-        versesList.add("\"Daniel 2:21, LBLA");
-        versesList.add("\"1 Corintios 13:12");
-        versesList.add("\"2 Tesalonicenses 1:3");
-        versesList.add("\"Efesios 1:17");
-        versesList.add("\"Santiago 1:5");
-        versesList.add("\"Salmos 107:8-9\"");
+        versesList.add("\"Proverbios 18:24, NVI\"");
+        versesList.add("\"Proverbios 22:6\"");
+        versesList.add("\"1 Tesalonicenses 5:8, NVI\"");
+        versesList.add("\"2 Corintios 11:13, 14\"");
+        versesList.add("\"Mateo 24:36\"");
+        versesList.add("\"Éxodo 3:5\"");
+        versesList.add("\"1 Corintios 13:1\"");
 
         return versesList;
     }
 
     public ArrayList<String> getVerses3RList() {
-        versesList.add("\"Génesis 2:16\"");
-        versesList.add("\"Génesis 25:34");
-        versesList.add("\"Zacarías 9:17");
-        versesList.add("\"1 Corintios 10:3");
-        versesList.add("\"Génesis 25:6");
-        versesList.add("\"Colosenses 4:6");
-        versesList.add("\"1 Tesalonicenses 5:21\"");
-        versesList.add("\"Juan 7:46, LBLA\"");
+        versesList.add("\"Juan 20:29\"");
+        versesList.add("\"Mateo 6:33\"");
+        versesList.add("\"Mateo 11:28\"");
+        versesList.add("\"Malaquías 3:16\"");
+        versesList.add("\"Juan 14:6\"");
+        versesList.add("\"Salmos 91:1-3\"");
+        versesList.add("\"Mateo 16:2, 3, NTV\"");
 
         return versesList;
     }
 
     public ArrayList<String> getVersesFRList() {
-        versesList.add("\"Proverbios 12:19\"");
-        versesList.add("\"Génesis 3:12");
-        versesList.add("\"Proverbios 15:23\"");
-        versesList.add("\"Proverbios 18:21\"");
-        versesList.add("\"Proverbios 31:8\"");
-        versesList.add("\"Mateo 12:36\"");
-        versesList.add("\"Génesis 1:26\"");
-        versesList.add("\"1 Pedro 3:9\"");
+        versesList.add("\"1 Tesalonicenses 5:12, 13\"");
+        versesList.add("\"Salmos 105:15\"");
+        versesList.add("\"2 Timoteo 2:15\"");
+        versesList.add("\"Lucas 15:6\"");
+        versesList.add("\"Lucas 15:4\"");
+        versesList.add("\"Eclesiastés 3:11\"");
+        versesList.add("\"Marcos 1:35\"");
+        versesList.add("\"Jueces 7:6\"");
 
         return versesList;
     }
 
     public ArrayList<String> getDates1RAList() {
-        datesList.add("1 de Agosto");
-        datesList.add("3 de Agosto");
-        datesList.add("6 de Agosto");
-        datesList.add("7 de Agosto");
+        datesList.add("3 de Octubre");
+        datesList.add("4 de Octubre");
+        datesList.add("6 de Octubre");
+        datesList.add("7 de Octubre");
 
         return datesList;
     }
 
     public ArrayList<String> getDates1RBList() {
-        datesList.add("2 de Agosto");
-        datesList.add("4 de Agosto");
-        datesList.add("5 de Agosto");
+        datesList.add("1 de Octubre");
+        datesList.add("2 de Octubre");
+        datesList.add("5 de Octubre");
 
         return datesList;
     }
 
     public ArrayList<String> getDates2RAList() {
-        datesList.add("11 de Agosto");
-        datesList.add("12 de Agosto");
-        datesList.add("13 de Agosto");
-        datesList.add("14 de Agosto");
+        datesList.add("8 de Octubre");
+        datesList.add("9 de Octubre");
+        datesList.add("11 de Octubre");
+        datesList.add("15 de Octubre");
 
         return datesList;
     }
 
     public ArrayList<String> getDates2RBList() {
-        datesList.add("8 de Agosto");
-        datesList.add("9 de Agosto");
-        datesList.add("10 de Agosto");
-        datesList.add("15 de Agosto");
+        datesList.add("10 de Octubre");
+        datesList.add("12 de Octubre");
+        datesList.add("13 de Octubre");
+        datesList.add("14 de Octubre");
 
         return datesList;
     }
 
     public ArrayList<String> getDates3RAList() {
-        datesList.add("17 de Agosto");
-        datesList.add("19 de Agosto");
-        datesList.add("22 de Agosto");
-        datesList.add("23 de Agosto");
+        datesList.add("19 de Octubre");
+        datesList.add("21 de Octubre");
+        datesList.add("22 de Octubre");
+        datesList.add("23 de Octubre");
 
         return datesList;
     }
 
     public ArrayList<String> getDates3RBList() {
-        datesList.add("16 de Agosto");
-        datesList.add("18 de Agosto");
-        datesList.add("20 de Agosto");
-        datesList.add("21 de Agosto");
+        datesList.add("16 de Octubre");
+        datesList.add("17 de Octubre");
+        datesList.add("18 de Octubre");
+        datesList.add("20 de Octubre");
 
         return datesList;
     }
 
     public ArrayList<String> getDatesFRAList() {
-        datesList.add("27 de Agosto");
-        datesList.add("28 de Agosto");
-        datesList.add("30 de Agosto");
-        datesList.add("31 de Agosto");
+        datesList.add("24 de Octubre");
+        datesList.add("26 de Octubre");
+        datesList.add("28 de Octubre");
+        datesList.add("30 de Octubre");
 
         return datesList;
     }
 
     public ArrayList<String> getDatesFRBList() {
-        datesList.add("24 de Agosto");
-        datesList.add("25 de Agosto");
-        datesList.add("26 de Agosto");
-        datesList.add("29 de Agosto");
+        datesList.add("25 de Octubre");
+        datesList.add("27 de Octubre");
+        datesList.add("29 de Octubre");
+        datesList.add("31 de Octubre");
 
         return datesList;
     }
 
     public ArrayList<String> getTitles1RAList() {
-        titlesList.add("\"Comprobación empírica\"");
-        titlesList.add("\"A la búsqueda del empático\"");
-        titlesList.add("\"Regla de navegación\"");
-        titlesList.add("\"Más que una acreditación\"");
+        titlesList.add("\"Y esto, ¿cómo se puede arreglar?\"");
+        titlesList.add("\"Dietas y coronas\"");
+        titlesList.add("\"Renuncio\"");
+        titlesList.add("\"Arremangados\"");
 
         return titlesList;
     }
 
     public ArrayList<String> getTitles1RBList() {
-        titlesList.add("\"Gente ‘detox’\"");
-        titlesList.add("\"Ni Peter Pan ni Wendy\"");
-        titlesList.add("\"Entrenando la empatía\"");
+        titlesList.add("\"Todos funambulistas\"");
+        titlesList.add("\"Por puro placer\"");
+        titlesList.add("\"Las fronteras de la religión\"");
 
         return titlesList;
     }
 
     public ArrayList<String> getTitles2RAList() {
-        titlesList.add("\"La Era de la Distracción\"");
-        titlesList.add("\"Mundo líquido\"");
-        titlesList.add("\"Esnórquel\"");
-        titlesList.add("\"Estar, parecer o ser\"");
+        titlesList.add("\"Caducidad necesaria\"");
+        titlesList.add("\"No hay 'que' que valga\"");
+        titlesList.add("\"Leer entre líneas\"");
+        titlesList.add("\"Nada y todo\"");
 
         return titlesList;
     }
 
     public ArrayList<String> getTitles2RBList() {
-        titlesList.add("\"Un negocio rentable\"");
-        titlesList.add("\"Una pastilla de jabón muy especial\"");
-        titlesList.add("\"Candy Crush\"");
-        titlesList.add("\"Una mimosa en el norte\"");
+        titlesList.add("\"Síntesis de síntesis\"");
+        titlesList.add("\"Kong Nyong\"");
+        titlesList.add("\"¿Ejemplos?\"");
+        titlesList.add("\"Igual de persona\"");
 
         return titlesList;
     }
 
     public ArrayList<String> getTitles3RAList() {
-        titlesList.add("\"Verde caricia\"");
-        titlesList.add("\"Sin tiempo amarillo\"");
-        titlesList.add("\"Mapeando la felicidad\"");
-        titlesList.add("\"En primer lugar\"");
+        titlesList.add("\"A su i-magen\"");
+        titlesList.add("\"'El Avaro', de Moliére\"");
+        titlesList.add("\"Efemérides\"");
+        titlesList.add("\"Casi de oro puro\"");
 
         return titlesList;
     }
 
     public ArrayList<String> getTitles3RBList() {
-        titlesList.add("\"Vidas silenciosas\"");
-        titlesList.add("\"‘Cwtch’\"");
-        titlesList.add("\"Jesús, el cariñoso\"");
-        titlesList.add("\"El instrumento más poderoso\"");
+        titlesList.add("\"La mejor inversión\"");
+        titlesList.add("\"Sin dinero pero no sin coste\"");
+        titlesList.add("\"Sin olvidar las pelotas de golf\"");
+        titlesList.add("\"Ahora me encargo yo\"");
 
         return titlesList;
     }
 
     public ArrayList<String> getTitlesFRAList() {
-        titlesList.add("\"Ten fe, ora y alégrate\"");
-        titlesList.add("\"Disfrutando la vida en Cristo\"");
-        titlesList.add("\"Mente positiva\"");
-        titlesList.add("\"Oportunidad\"");
+        titlesList.add("\"Término medio\"");
+        titlesList.add("\"'Bon appétit'\"");
+        titlesList.add("\"Colache\"");
+        titlesList.add("\"En línea recta\"");
 
         return titlesList;
     }
 
     public ArrayList<String> getTitlesFRBList() {
-        titlesList.add("\"Subrayando lo importante\"");
-        titlesList.add("\"Aunque\"");
-        titlesList.add("\"Entonando la alegría\"");
-        titlesList.add("\"Narciso y Goldmundo\"");
+        titlesList.add("\"El precio justo\"");
+        titlesList.add("\"Discromatopsia\"");
+        titlesList.add("\"La mirada del ángel\"");
+        titlesList.add("\"Increíble\"");
 
         return titlesList;
     }
 
     public ArrayList<String> getVerseContents1RAList() {
-        verseContentsList.add("«Buscad a Jehová y vivid...»");
-        verseContentsList.add("«Gozaos con los que se gozan; llorad con los que lloran»");
-        verseContentsList.add("«Sobrellevad los unos las cargas de los otros, y cumplid así la ley de Cristo»");
-        verseContentsList.add("«Permanezca el amor fraternal. No os olvidéis de la hospitalidad, porque por ella algunos, sin saberlo, hospedaron ángeles»");
+        verseContentsList.add("«Pero al disertar Pablo acerca de la justicia, del dominio propio y del juicio venidero, Félix se espantó y dijo: Ahora vete, y cuando tenga oportunidad, te llamaré»");
+        verseContentsList.add("«Todo aquel que lucha, de todo se abstiene; ellos, a la verdad, para recibir una corona incorruptible, pero nosotros, una incorruptible»");
+        verseContentsList.add("«La gracia de Dios se ha manifestado para salvación a toda la humanidad, y nos enseña que, renunciando a la impiedad y a los deseos mundanos, vivamos en este siglo sobria, justa y piadosamente»");
+        verseContentsList.add("«Por tanto, ceñid los lomos de vuestro entendimiento, sed...»");
         return verseContentsList;
     }
 
     public ArrayList<String> getVerseContents1RBList() {
-        verseContentsList.add("«Aprended a hacer el bien, buscad el derecho, socorred al agraviado, haced justicia al huérfano, amparad a la viuda»");
-        verseContentsList.add("«Cada uno de nosotros agrade a su prójimo en lo que es bueno, para edificación»");
-        verseContentsList.add("«Nadie busque a su propio bien, sino el del otro»");
+        verseContentsList.add("«¡Que Dios me pese en la balanza de la justicia y reconocerá mi integridad!»");
+        verseContentsList.add("«Pon un cuchillo a tu garganta, si tienes mucho apetito»");
+        verseContentsList.add("«Pretenden ser doctores de la Ley, cuando no entienden ni lo que hablan ni lo que afirman»");
 
         return verseContentsList;
     }
 
     public ArrayList<String> getVerseContents2RAList() {
-        verseContentsList.add("«Sacad al pueblo ciego que tiene ojos y a los sordos que tienen oídos»");
-        verseContentsList.add("«No os conforméis a este mundo, sino transformaos por medio de la renovación de vuestro entendimiento, para que comprobéis cuál es la buena voluntad de Dios, agradable y perfecta»");
-        verseContentsList.add("«Sed hacedores de la palabra y no solamente oidores...»");
-        verseContentsList.add("«Jesús le dijo: Yo soy. Y veréis al Hijo del hombre sentado a la diestra del poder de Dios y viniendo en las nubes del cielo»");
+        verseContentsList.add("«Delante de las canas te levantarás y honrarás el rostro del anciano. De tu Dios tendrás temor. Yo, Jehová»");
+        verseContentsList.add("«Por eso Jehová, el Dios de Israel, dice: \"Yo había prometido que tu casa y la casa de tu padre andarían siempre delante de mí\"; pero ahora ha dicho Jehová: \"Nunca haga yo tal cosa, porque yo honro a los que me honran, y los que me desprecian serán tenidos en poco\"»");
+        verseContentsList.add("«Le preguntaron, diciendo: -Maestro, sabemos que dices y enseñas rectamente, y que no haces acepción de persona, sino que enseñas el camino de Dios con verdad»");
+        verseContentsList.add("«Bienaventurados los pobres en espíritu, porque de ellos es el reino de los cielos»");
 
         return verseContentsList;
     }
 
     public ArrayList<String> getVerseContents2RBList() {
-        verseContentsList.add("«¡Cuán innumerables son tus obras, Jehová! Hiciste todas ellas con sabiduría; ¡la tierra está llena de tus beneficios!»");
-        verseContentsList.add("«¿Con qué limpiará el joven su camino? ¡Con guardar tu palabra!»");
-        verseContentsList.add("«El perezoso desea y nada alcanza, mas los diligentes serán prosperados»");
-        verseContentsList.add("«Goteará como la lluvia mi enseñanza; destilará como el rocío mi razonamiento, como la llovizna sobre el grano, como las gotas sobre la hierba»");
+        verseContentsList.add("«Así que todas las cosas que queráis que los hombres hagan con vosotros, así también haced vosotros con ellos, pues esto es la Ley y los Profetas»");
+        verseContentsList.add("«Pero el que actúa con injusticia recibirá la injusticia que haya cometido, porque no hay acepción de personas»");
+        verseContentsList.add("«Acordaos de vuestros padres, que os hablaron la palabra de Dios; considerad cuál haya sido el resultado de su conducta e imitad su fe»");
+        verseContentsList.add("«Vosotros, maridos, igualmente, vivid con ellas sabiamente, dando honor a la mujer como a vaso más frágil y como a coherederos de la gracia de la vida, para que vuestras oraciones no tengan estorbo»");
 
         return verseContentsList;
     }
 
     public ArrayList<String> getVerseContents3RAList() {
-        verseContentsList.add("«Después dijo Dios: “Produzca la tierra hierba verde, hierba que dé semilla; árbol que dé fruto según su especie, cuya semilla esté en él, sobre la tierra”. Y fue así»");
-        verseContentsList.add("«Jehová se me manifestó hace ya mucho tiempo, diciendo: Con amor eterno te he amado; por eso, te prolongué mi misericordia»");
-        verseContentsList.add("«De mañana sácianos de tu misericordia, y cantaremos y nos alegraremos todos nuestros días»");
-        verseContentsList.add("«Bienaventurado el pueblo que sabe aclamarte; andará, Jehová, a la luz de tu rostro»");
+        verseContentsList.add("«Ningún siervo puede servir a dos señores, porque odiará al uno y amará al otro, o estimará al uno y menospreciar al otro...»");
+        verseContentsList.add("«Sean vuestras costumbres sin avaricia, contentos con lo que tenéis ahora, pues él dijo: No te desampararé ni te dejaré»");
+        verseContentsList.add("«...El juez se sentó y los libros fueron abiertos»");
+        verseContentsList.add("«Jehová abomina el peso falso, pero la pesa cabal agrada»");
 
         return verseContentsList;
     }
 
     public ArrayList<String> getVerseContents3RBList() {
-        verseContentsList.add("«Entonces murió Débora, nodriza de Rebeca, y fue sepultada al pie de Bet-el, debajo de una encina, la cual fue llamada “Alón-bacut”»");
-        verseContentsList.add("«Saludaos unos a otros con un beso de amor. Paz sea con todos vosotros los que estáis en Jesucristo. Amén»");
-        verseContentsList.add("«Y tomándolos en los brazos, ponía las manos sobre ellos y los bendecía»");
-        verseContentsList.add("«Jesús decía: Padre, perdónalos, porque no saben lo que hacen»");
+        verseContentsList.add("«...De gracia recibisteis, dad de gracia»");
+        verseContentsList.add("«Porque así dice Jehová: De balde fuisteis vendidos; por tanto, sin dinero seréis rescatados»");
+        verseContentsList.add("«Buscad primeramente el reino de Dios y su justicia, y todas estas cosas os serán añadidas»");
+        verseContentsList.add("«Mi Dios, pues, suplirá todo lo que os falta conforme a sus riquezas en gloria en Cristo Jesús»");
 
         return verseContentsList;
     }
 
     public ArrayList<String> getVerseContentsFRAList() {
-        verseContentsList.add("«Hasta ahora nada habéis pedido en mi nombre; pedid, y recibiréis, para que vuestro gozo sea completo»");
-        verseContentsList.add("«Gozosos en la esperanza, sufridos en la tribulación, constantes en la oración»");
-        verseContentsList.add("«Estad siempre gozosos. Orad sin cesar. Dad gracias en todo, porque esta es la voluntad de Dios para con vosotros en Cristo Jesús»");
-        verseContentsList.add("«Tiempo de llorar y tiempo de reír; tiempo de hacer duelo y tiempo de bailar»");
+        verseContentsList.add("«La justicia, solo la justicia seguirás, para que vivas y heredes la tierra que Jehová, tu Dios, te da»");
+        verseContentsList.add("«Bienaventurados los que tienen hambre y sed de justicia, porque serán saciados»");
+        verseContentsList.add("«Ve si hay en mí camino de perversidad y guíame en el camino eterno»");
+        verseContentsList.add("«No os unáis en yugo desigual con los incrédulos, porque ¿qué compañerismo tiene la justicia con la injusticia? ¿Y qué comunión, la luz con las tinieblas?»");
 
         return verseContentsList;
     }
 
     public ArrayList<String> getVerseContentsFRBList() {
-        verseContentsList.add("«En la multitud de mis pensamientos íntimos, tus consolaciones alegraban mi alma»");
-        verseContentsList.add("«Aunque la higuera no florezca ni en las vides haya frutos, aunque falte el producto del olivo y los labrados no den mantenimiento, aunque las ovejas sean quitadas de la majada y no haya vacas en los corrales, con todo, yo me alegraré en Jehová, me gozaré en el Dios de mi salvación»");
-        verseContentsList.add("« Y oí como la voz de una gran multitud, como el estruendo de muchas aguas y como la voz de grandes truenos, que decía: ¡Aleluya!, porque el Señor, nuestro Dios Todopoderoso, reina. Gocémonos, alegrémonos y démosle gloria...»");
-        verseContentsList.add("«Regocijaos en el Señor siempre. Otra vez digo: ¡Regocijaos!»");
+        verseContentsList.add("«En gran manera me gozaré en Jehová , mi alma se alegrará en mi Dios, porque me vistió con vestiduras de salvación, me rodeó de manto de justicia...»");
+        verseContentsList.add("«Tan pronto la nube se apartó del Tabernáculo, María se llenó de lepra, y tenía la piel blanca como la nieve»");
+        verseContentsList.add("«Mirad que no menospreciéis a uno de estos pequeños, porque os digo que sus ángeles en los cielos ven siempre el rostro de mi Padre que está en los cielos»");
+        verseContentsList.add("«No os engañéis; Dios no puede ser burlado, pues todo lo que el hombre siembre, eso también segará»");
 
         return verseContentsList;
     }
 
     public ArrayList<String> getVerses1RAList() {
-        versesList.add("\"Amós 5: 6\"");
-        versesList.add("\"Romanos 12: 15");
-        versesList.add("\"Gálatas 6: 2\"");
-        versesList.add("\"Hebreos 13: 1-2\"");
+        versesList.add("\"Hechos 24: 25\"");
+        versesList.add("\"1 Corintios 9: 25\"");
+        versesList.add("\"Tito 2: 11-12\"");
+        versesList.add("\"1 Pedro 1: 13\"");
 
         return versesList;
     }
 
     public ArrayList<String> getVerses1RBList() {
-        versesList.add("\"Isaías 1: 17\"");
-        versesList.add("\"Romanos 15: 2\"");
-        versesList.add("\"1 Corintios 10: 24\"");
+        versesList.add("\"Job 31: 6\"");
+        versesList.add("\"Proverbios 23: 2\"");
+        versesList.add("\"1 Timoteo 1: 7\"");
 
         return versesList;
     }
 
     public ArrayList<String> getVerses2RAList() {
-        versesList.add("\"Isaías 43: 8");
-        versesList.add("\"Romanos 12: 2");
-        versesList.add("\"Santiago 1: 22");
-        versesList.add("\"Marcos 14: 62");
+        versesList.add("\"Levítico 19: 32\"");
+        versesList.add("\"1 Samuel 2: 30\"");
+        versesList.add("\"Lucas 20: 21\"");
+        versesList.add("\"Mateo 5: 3\"");
 
         return versesList;
     }
 
     public ArrayList<String> getVerses2RBList() {
-        versesList.add("\"Salmos 104: 24\"");
-        versesList.add("\"Mateo 23: 23");
-        versesList.add("\"Proverbios 13: 4");
-        versesList.add("\"Deuteronomio 32: 2");
+        versesList.add("\"Mateo 7: 12\"");
+        versesList.add("\"Colosenses 3: 25\"");
+        versesList.add("\"Hebreos 13: 7\"");
+        versesList.add("\"1 Pedro 3: 7\"");
 
         return versesList;
     }
 
     public ArrayList<String> getVerses3RAList() {
-        versesList.add("\"Génesis 1: 11\"");
-        versesList.add("\"Jeremías 31: 3");
-        versesList.add("\"Salmos 90: 14");
-        versesList.add("\"Salmos 89: 15");
+        versesList.add("\"Lucas 16: 13\"");
+        versesList.add("\"Hebreos 13: 5\"");
+        versesList.add("\"Daniel 7: 10\"");
+        versesList.add("\"Proverbios 11: 1\"");
 
         return versesList;
     }
 
     public ArrayList<String> getVerses3RBList() {
-        versesList.add("\"Génesis 35: 8");
-        versesList.add("\"1 Pedro 5: 14");
-        versesList.add("\"Marcos 10: 16\"");
-        versesList.add("\"Lucas 23: 24\"");
+        versesList.add("\"Mateo 10: 8\"");
+        versesList.add("\"Isaías 52: 3\"");
+        versesList.add("\"Mateo 6: 33\"");
+        versesList.add("\"Filipenses 4: 19\"");
 
         return versesList;
     }
 
     public ArrayList<String> getVersesFRAList() {
-        versesList.add("\"Juan 16: 24\"");
-        versesList.add("\"Romanos 12: 12\"");
-        versesList.add("\"1 Tesalonicenses 5: 16-18\"");
-        versesList.add("\"Eclesiastés 3: 4\"");
+        versesList.add("\"Deuteronomio 16: 20\"");
+        versesList.add("\"Mateo 5: 6\"");
+        versesList.add("\"Salmos 139: 24\"");
+        versesList.add("\"2 Corintios 6: 14\"");
 
         return versesList;
     }
 
     public ArrayList<String> getVersesFRBList() {
-        versesList.add("\"Salmos 94: 19\"");
-        versesList.add("\"Habacuc 3: 17-18");
-        versesList.add("\"Apocalipsis 19: 6-7\"");
-        versesList.add("\"Filipenses 4: 4\"");
+        versesList.add("\"Isaías 61: 10\"");
+        versesList.add("\"Números 12: 10\"");
+        versesList.add("\"Mateo 18: 10\"");
+        versesList.add("\"Gálatas 6: 7\"");
 
         return versesList;
     }
@@ -2092,7 +2088,7 @@ public class AdminActivity extends AppCompatActivity {
 
             tempQuestionList.add(new QuestionModel("¿Cuál es la fecha y el título del versículo " + selectedVerseContent + "?", selectedDate + "\n\n" + selectedTitle, "", "", "", "Nivel 2"));
             tempQuestionList.add(new QuestionModel("¿Cuál es la fecha y la cita bíblica del versículo " + selectedVerseContent + "?", selectedDate + "\n\n" + selectedVerse, "", "", "", "Nivel 2"));
-            tempQuestionList.add(new QuestionModel("¿Cuál es el título y la cita bíblica el versículo " + selectedVerseContent + "?", selectedTitle + "\n\n" + selectedVerse, "", "", "", "Nivel 2"));
+            tempQuestionList.add(new QuestionModel("¿Cuál es el título y la cita bíblica del versículo " + selectedVerseContent + "?", selectedTitle + "\n\n" + selectedVerse, "", "", "", "Nivel 2"));
 
             tempQuestionList.add(new QuestionModel("¿Cuál es la fecha y el título de la cita bíblica " + selectedVerse + "?", selectedDate + "\n\n" + selectedTitle, "", "", "", "Nivel 2"));
             tempQuestionList.add(new QuestionModel("¿Cuál es la fecha y el versículo de la cita bíblica " + selectedVerse + "?", selectedDate + "\n\n" + "\"" + selectedVerseContent + "\"", "", "", "", "Nivel 2"));
